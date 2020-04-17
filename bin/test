@@ -3,6 +3,7 @@
 console.log('Running test...');
 
 const userModel = require('../api/models/user');
+const buisnessModel = require('../api/models/buisness');
 
-const user = new userModel('zack', 'ankner', '32');
-console.log(user.serialize());
+const buisness = new buisnessModel('zack', ['test'], []);
+console.log(buisness.serialize());

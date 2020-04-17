@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
 import { ErrorMessage, Field, Form, Formik, getIn } from 'formik';
-import SignupSchema from '../modules/schemas/SignupSchema';
+import SignupSchema from '../../modules/schemas/SignupSchema';
 import { parse } from 'query-string';
 
 class SignupForm extends React.Component {

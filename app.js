@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const enforce = require('express-sslify');
+const admin = require('firebase-admin');
 
 // Create express app
 const app = express();
@@ -15,6 +16,14 @@ if (process.env.NODE_ENV !== 'production') {
 	console.log('Running in production mode');
 	app.use(enforce.HTTPS({ trustProtoHeader: true }));
 }
+
+// Set up firebase
+const serviceAccount = require("./serviceAccountKey.json");
+
+admin.initializeApp({
+	credential: admin.credential.cert(serviceAccount),
+	databaseURL: "https://persist-a2760.firebaseio.com"
+});
 
 // Define routers
 const indexRouter = require('./routes/index');

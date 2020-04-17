@@ -5,7 +5,7 @@ import 'firebase/auth';
 import { withFirebase } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import LoginSchema from '../modules/schemas/LoginSchema';
+import LoginSchema from '../../modules/schemas/LoginSchema';
 import { ErrorMessage, Field, Form, Formik, getIn } from 'formik';
 import { parse } from 'query-string';
 

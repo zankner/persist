@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import Home from '../../pages';
+import Home from '../../src/pages';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -13,11 +13,22 @@ import rootReducer from '../../modules/reducers';
 import '@firebase/firestore';
 import '@firebase/auth';
 import '@firebase/storage';
-import Login from '../../pages/login';
-import Signup from '../../pages/signup';
+import Login from '../../src/pages/login';
+import Signup from '../../src/pages/signup';
 
 // Initialize Firebase
-firebase.initializeApp({});
+const firebaseConfig = {
+	apiKey: "AIzaSyBRbbnCBPgxHwNB2vQAObT7K1g383Ij5jo",
+	authDomain: "persist-a2760.firebaseapp.com",
+	databaseURL: "https://persist-a2760.firebaseio.com",
+	projectId: "persist-a2760",
+	storageBucket: "persist-a2760.appspot.com",
+	messagingSenderId: "473760025562",
+	appId: "1:473760025562:web:7359badb9dc9f660828ee3",
+	measurementId: "G-ZBJ9CVEWXQ"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 firebase.firestore();
 

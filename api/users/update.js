@@ -6,7 +6,7 @@ const check = require('check-types');
 module.exports = async (req, res) => {
 
   const {email, firstName, lastName, number, birthdate, billing,
-    businesses, orders, schedule, receipts} = req.body;
+    businesses, orders, schedule, receipts, address} = req.body;
 
   try {
     check.assert.nonEmptyString(email);
@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
     check.assert.nonEmptyString(lastName);
     check.assert.string(number);
     check.assert.string(birthdate);
+    check.assert.string(address);
     check.assert.object(billing);
     check.assert.array(businesses);
     check.assert.array(orders);
@@ -38,6 +39,7 @@ module.exports = async (req, res) => {
       birthdate,
       number,
       billing,
+      address,
       businesses,
       orders,
       schedule,

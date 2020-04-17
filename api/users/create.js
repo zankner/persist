@@ -23,13 +23,14 @@ module.exports = async (req, res) => {
       email,
       firstName,
       lastName,
+      address: '',
       birthdate: '',
       number: '',
       billing: {},
       businesses: [],
       orders: [],
       schedule: [],
-      recipe: []
+      receipts: []
     };
 
     const userRef = admin.firestore().collection('users').doc(uid);

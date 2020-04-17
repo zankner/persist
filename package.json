@@ -6,6 +6,7 @@
     "start": "node ./bin/start",
     "dev": "nodemon ./bin/start",
     "test": "node ./bin/test",
+    "test-web": "node ./bin/test-web.js",
     "build": "webpack"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "@types/googlemaps": "^3.37.0",
     "@types/markerclustererplus": "^2.1.33",
     "@types/react": "^16.8.23",
+    "axios": "^0.19.2",
     "bootstrap": "^4.3.1",
     "check-types": "^11.1.2",
     "cookie-parser": "^1.4.4",

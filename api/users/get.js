@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
     const userRef = admin.firestore().collection('users').doc(uid);
     const userDoc = await userRef.get();
     if (!userDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
-
     return res.send(userDoc.data());
   } catch(err) {
     console.log(err.message);

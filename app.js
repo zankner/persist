@@ -27,6 +27,7 @@ admin.initializeApp({
 
 // Define routers
 const indexRouter = require('./routes/index');
+const apiRouter = require('./routes/api');
 
 // Set up app
 app.use(express.json());
@@ -35,6 +36,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set up routers
+app.use('/api', apiRouter);
 app.use('/', indexRouter);
+
 
 module.exports = app;

@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
       name,
       address,
       number,
-      admins: [userRef],
+      admins: [uid],
       emailList: '',
       schedule: [],
       products: [],
@@ -37,7 +37,8 @@ module.exports = async (req, res) => {
       logo: '',
       requests: [],
       orders: [],
-      billing: {}
+      billing: {},
+      pendingOwners: []
     };
 
     const businessId = `${uid}-${Date.now()}`;
@@ -46,6 +47,8 @@ module.exports = async (req, res) => {
 
     if (!businessDoc.data()) await businessRef.set(business);
     else return res.sendStatus(status.NOT_ACCEPTABLE);
+
+    await userRef.update({businesses: admin.firestore.FieldValue.arrayUnion(businessRef)});
 
     return res.send(business);
   } catch(err) {

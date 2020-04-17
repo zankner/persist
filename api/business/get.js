@@ -4,10 +4,7 @@ const status = require('http-status');
 
 module.exports = async (req, res) => {
   try {
-    const { uid } = await admin.auth().verifyIdToken(req.headers.authorization);
-    if (uid !== req.params.user) return res.sendStatus(status.UNAUTHORIZED);
-
-    const businessRef = admin.firestore().collection('businesses').doc(uid);
+    const businessRef = admin.firestore().collection('businesses').doc(req.params.business);
     const businessDoc = await businessRef.get();
     if (!businessDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
     const business = businessDoc.data();

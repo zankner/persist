@@ -17,7 +17,7 @@ console.log('Testing...');
 const pswd = 'zankner';
 
 const email = 'zackankner@gmail.com';
-const firstName = 'zack';
+const firstName = 'test';
 const lastName = 'ankner';
 const address = '226 beacon street';
 const birthdate = '+16179393564';
@@ -31,15 +31,18 @@ const dataStreams = {
   spotify: 'VxWaQxPWI0MyKuhxe9RMrQQEvvx2-1584826355981'
 };
 
+const business = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587158946208';
 
 
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.request(`http://localhost:3000/api/users/${user.uid}/get`,
+    axios.get(`http://localhost:3000/api/businesses/${business}/get`,
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);
+    }).catch(err => {
+      console.log(err)
     });
   });
 });

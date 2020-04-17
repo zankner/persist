@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     const { uid } = await admin.auth().verifyIdToken(req.headers.authorization);
     if (!uid) return res.sendStatus(status.UNAUTHORIZED);
 
-    const businessRef = admin.firestore().collection('businesses').doc(req.params.businesses);
+    const businessRef = admin.firestore().collection('businesses').doc(req.params.business);
     const businessDoc = await businessRef.get();
     const business = businessDoc.data();
     if (!business) return res.sendStatus(status.UNAUTHORIZED);
@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
     business.address = address || business.address;
     business.number = number || business.number;
     business.logo = logo || business.logo;
-    business.emailList = emailList || business.emailLis;
+    business.emailList = emailList || business.emailList;
 
     await businessRef.update(business);
 

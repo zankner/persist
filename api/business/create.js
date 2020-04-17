@@ -4,7 +4,6 @@ const status = require('http-status');
 const check = require('check-types');
 
 module.exports = async (req, res) => {
-
   const {email, name, address, number} = req.body;
 
   try {
@@ -43,7 +42,7 @@ module.exports = async (req, res) => {
 
     const businessId = `${uid}-${Date.now()}`;
     const businessRef = admin.firestore().collection('businesses').doc(businessId);
-    const businessDoc = businessRef.get();
+    const businessDoc = await businessRef.get();
 
     if (!businessDoc.data()) await businessRef.set(business);
     else return res.sendStatus(status.NOT_ACCEPTABLE);

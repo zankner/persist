@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
       firstName,
       lastName,
       birthdate: '',
+      number: '',
       billing: {},
       businesses: [],
       orders: [],

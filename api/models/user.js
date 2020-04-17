@@ -23,7 +23,7 @@ module.exports = class User {
     return {
       first_name: this.first_name,
       last_name: this.last_name,
-      birthdate: this.birthdate,
+      birthdate: this.birthdate || '',
       billing: this.billing || {},
       buisnesses: this.buisnesses || [],
       orders: this.orders || [],

@@ -4,6 +4,7 @@ console.log('Running test...');
 
 const userModel = require('../api/models/user');
 const buisnessModel = require('../api/models/buisness');
+const orderModel = require('../api/models/order');
 
-const buisness = new buisnessModel('zack', ['test'], []);
-console.log(buisness.serialize());
+const order = new orderModel('zack', ['test'], 'a', 'a', 'a', 'a', 'a', 'a');
+console.log(order.serialize());

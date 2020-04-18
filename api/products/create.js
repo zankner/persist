@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     check.assert.maybe.array.of.nonEmptyString(photos);
     check.assert.nonEmptyString(description);
     check.assert.nonEmptyString(title);
-    check.assert.nonEmptyString(price);
+    check.assert.number(price);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -30,7 +30,8 @@ module.exports = async (req, res) => {
       photos: photos || [],
       description,
       title,
-      price
+      price,
+      availability: 'available'
     };
 
     const productId = `${uid}-${Date.now()}`;

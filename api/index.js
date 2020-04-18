@@ -20,3 +20,9 @@ module.exports.orders = {
     get: require('./orders/customer/get')
   }
 };
+
+module.exports.products = {
+  create: require('./products/create'),
+  update: require('./products/update'),
+  get: require('./products/get')
+};

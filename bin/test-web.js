@@ -42,12 +42,17 @@ const orderStatus = 'declined';
 
 const order = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587174959937';
 
+const photos = [];
+const description = 'test';
+const title = 'test';
+const price = 5;
 
 
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.get(`http://localhost:3000/api/orders/${order}/customer/get`,
+    axios.post(`http://localhost:3000/api/products/create`,
+      {business, photos, description, title, price},
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

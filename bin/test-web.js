@@ -47,8 +47,7 @@ const order = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587174959937';
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.post(`http://localhost:3000/api/orders/${order}/${business}/update`,
-      {orderStatus},
+    axios.get(`http://localhost:3000/api/orders/${order}/customer/get`,
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

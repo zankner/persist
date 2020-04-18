@@ -16,7 +16,7 @@ router.get('/businesses/:business/get', api.businesses.get);
 // Orders
 router.post('/orders/create', api.orders.create);
 router.post('/orders/:order/:business/update', api.orders.businesses.update);
-router.post('/orders/:order/business/get', api.orders.businesses.get);
-router.post('/orders/:order/customer/get', api.orders.customers.get);
+router.get('/orders/:order/business/get', api.orders.businesses.get);
+router.get('/orders/:order/customer/get', api.orders.customers.get);
 
 module.exports = router;

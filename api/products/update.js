@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     check.assert.maybe.array.of.nonEmptyString(photos);
     check.assert.maybe.nonEmptyString(description);
     check.assert.maybe.nonEmptyString(title);
-    check.assert.maybe.nonEmptyString(price);
+    check.assert.maybe.number(price);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }

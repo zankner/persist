@@ -47,12 +47,14 @@ const description = 'test';
 const title = 'test';
 const price = 5;
 
+const product = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280';
+
 
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.post(`http://localhost:3000/api/products/create`,
-      {business, photos, description, title, price},
+    axios.post(`http://localhost:3000/api/products/${product}/update`,
+      {photos, description, title, price},
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

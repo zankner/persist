@@ -37,14 +37,18 @@ const business = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587158946208';
 const products = ['test', 't'];
 const dateOrdered = moment().format();
 const customer = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2';
+const orderStatus = 'declined';
+
+
+const order = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587174959937';
 
 
 
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.post(`http://localhost:3000/api/orders/create`,
-      {business, products, dateOrdered},
+    axios.post(`http://localhost:3000/api/orders/${order}/${business}/update`,
+      {orderStatus},
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

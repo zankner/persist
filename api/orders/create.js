@@ -38,8 +38,8 @@ module.exports = async (req, res) => {
       customer: customerRef
     };
 
-    const orderId = `${uid}-${uid}-${Date.now()}`;
-    const orderRef = admin.firestore().collection('order').doc(orderId);
+    const orderId = `${uid}-${Date.now()}`;
+    const orderRef = admin.firestore().collection('orders').doc(orderId);
     const orderDoc = await orderRef.get();
 
     if (!orderDoc.data()) await orderRef.set(order);

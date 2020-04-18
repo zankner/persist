@@ -5,11 +5,10 @@ const check = require('check-types');
 
 module.exports = async (req, res) => {
 
-  const {status, order} = req.body;
+  const {orderStatus} = req.body;
 
   try {
-    check.assert.nonEmptyString(status);
-    check.assert.nonEmptyObject(order)
+    check.assert.nonEmptyString(orderStatus);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -20,18 +19,17 @@ module.exports = async (req, res) => {
     if (!businessDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
     if (!businessDoc.data().admins.includes(uid)) return res.sendStatus(status.UNAUTHORIZED);
 
-
     const orderRef = admin.firestore().collection('orders').doc(req.params.order);
     const orderDoc = await orderRef.get();
     if (!orderDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
 
-    if (orderDoc.data().customerStatus === 'cancelled') return res.sendStatus('order was cancelled');
+    if (orderDoc.data().customerStatus === 'cancelled') return res.sendStatus(status.UNAUTHORIZED);
 
     // Implement stripe shit here :
-    if (status === 'confirmed' || status === 'declined') {
+    if (orderStatus === 'confirmed' || orderStatus === 'declined') {
       await orderRef.update({
-        businessStatus: status,
-        status
+        businessStatus: orderStatus,
+        status: orderStatus
       });
     } else {
       return res.sendStatus(status.UNAUTHORIZED);

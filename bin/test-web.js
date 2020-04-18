@@ -1,5 +1,6 @@
 const firebase = require('firebase');
 const axios = require('axios');
+const moment = require('moment');
 
 firebase.initializeApp({
   apiKey: "AIzaSyBRbbnCBPgxHwNB2vQAObT7K1g383Ij5jo",
@@ -33,11 +34,17 @@ const dataStreams = {
 
 const business = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587158946208';
 
+const products = ['test', 't'];
+const dateOrdered = moment().format();
+const customer = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2';
+
+
 
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.get(`http://localhost:3000/api/businesses/${business}/get`,
+    axios.post(`http://localhost:3000/api/orders/create`,
+      {business, products, dateOrdered},
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

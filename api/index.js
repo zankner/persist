@@ -9,3 +9,14 @@ module.exports.businesses = {
   update: require('./business/update'),
   get: require('./business/get')
 };
+
+module.exports.orders = {
+  create: require('./orders/create'),
+  businesses: {
+    update: require('./orders/business/update'),
+    get: require('./orders/business/get')
+  },
+  customers: {
+    get: require('./orders/customer/get')
+  }
+};

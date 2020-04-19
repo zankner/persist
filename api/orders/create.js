@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
       customerStatus: 'pending',
       businessStatus: 'pending',
       preferredDate: preferredDate,
-      dateFinished: '',
+      finalDate: '',
       customer: customerRef
     };
 

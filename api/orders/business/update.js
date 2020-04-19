@@ -5,10 +5,11 @@ const check = require('check-types');
 
 module.exports = async (req, res) => {
 
-  const {orderStatus} = req.body;
+  const {orderStatus, finalDate} = req.body;
 
   try {
     check.assert.nonEmptyString(orderStatus);
+    check.assert.nonEmptyString(finalDate);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -21,26 +22,26 @@ module.exports = async (req, res) => {
 
     const orderRef = admin.firestore().collection('orders').doc(req.params.order);
     const orderDoc = await orderRef.get();
-    if (!orderDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
+    const order = orderDoc.data();
+    if (!order) return res.sendStatus(status.UNAUTHORIZED);
 
-    if (orderDoc.data().customerStatus === 'declined') return res.sendStatus(status.UNAUTHORIZED);
+    if (order.customerStatus === 'declined') return res.sendStatus(status.UNAUTHORIZED);
 
     if (orderStatus === 'confirmed') {
-      await orderRef.update({
-        businessStatus: 'confirmed'
-      });
+      order.businessStatus = 'confirmed';
+      order.finalDate = finalDate;
       // Send text to user here
     } else if(orderStatus === 'declined') {
-      await orderRef.update({
-        businessStatus: 'declined',
-        status: 'declined'
-      });
+      order.businessStatus =  'declined';
+      order.status = 'declined';
       // Send text to user here
     } else {
       return res.sendStatus(status.UNAUTHORIZED);
     }
 
-    return res.send(orderDoc.data());
+    await orderRef.update(order);
+
+    return res.send(order);
   } catch(err) {
     console.log(err.message);
 

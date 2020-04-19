@@ -17,6 +17,7 @@ module.exports.orders = {
     get: require('./orders/business/get')
   },
   customers: {
+    update: require('./orders/customer/udpate'),
     get: require('./orders/customer/get')
   }
 };

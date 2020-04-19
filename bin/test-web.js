@@ -37,15 +37,18 @@ const business = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587158946208';
 const products = ['test', 't'];
 const dateOrdered = moment().format();
 const customer = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2';
-const orderStatus = 'declined';
+const orderStatus = 'confirmed';
 
 
-const order = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587174959937';
+const order = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587260454874';
 
 const photos = [];
 const description = 'test';
 const title = 'test';
 const price = 5;
+const preferredDate = moment().format();
+
+const finalDate = moment().format();
 
 const product = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280';
 
@@ -53,7 +56,8 @@ const product = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280';
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.get(`http://localhost:3000/api/products/${product}/get`,
+    axios.post(`http://localhost:3000/api/orders/${order}/customer/update`,
+      {orderStatus},
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

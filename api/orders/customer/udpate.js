@@ -21,29 +21,28 @@ module.exports = async (req, res) => {
 
     const orderRef = admin.firestore().collection('orders').doc(req.params.order);
     const orderDoc = await orderRef.get();
-    if (!orderDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
+    const order = orderDoc.data();
+    if (!order) return res.sendStatus(status.UNAUTHORIZED);
 
     if (uid !== orderDoc.data().customer.id) return res.sendStatus(status.UNAUTHORIZED);
 
-    if (orderDoc.data().businessStatus === 'declined') return res.sendStatus(status.UNAUTHORIZED);
+    if (order.businessStatus === 'declined') return res.sendStatus(status.UNAUTHORIZED);
 
     if (orderStatus === 'confirmed') {
-      await orderRef.update({
-        customerStatus: 'confirmed',
-        status: 'confirmed'
-      });
+      order.customerStatus = 'confirmed';
+      order.status = 'confirmed';
       // Stripe and text shit here
     } else if(orderStatus === 'declined') {
-      await orderRef.update({
-        customerStatus: 'declined',
-        status: 'declined'
-      });
+      order.customerStatus = 'declined';
+      order.status = 'declined';
       // Send text to user here
     } else {
       return res.sendStatus(status.UNAUTHORIZED);
     }
 
-    return res.send(orderDoc.data());
+    await orderRef.update(order);
+
+    return res.send(order);
   } catch(err) {
     console.log(err.message);
 

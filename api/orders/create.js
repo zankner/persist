@@ -4,12 +4,13 @@ const status = require('http-status');
 const check = require('check-types');
 
 module.exports = async (req, res) => {
-  const {business, products, dateOrdered} = req.body;
+  const {business, products, dateOrdered, preferredDate} = req.body;
 
   try {
     check.assert.nonEmptyString(business);
     check.assert.array.of.nonEmptyString(products);
     check.assert.nonEmptyString(dateOrdered);
+    check.assert.nonEmptyString(preferredDate);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -32,8 +33,9 @@ module.exports = async (req, res) => {
       products,
       dateOrdered,
       status: 'pending',
-      customerStatus: 'confirmed',
+      customerStatus: 'pending',
       businessStatus: 'pending',
+      preferredDate: preferredDate,
       dateFinished: '',
       customer: customerRef
     };

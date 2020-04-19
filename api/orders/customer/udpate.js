@@ -14,25 +14,28 @@ module.exports = async (req, res) => {
   }
   try {
     const { uid } = await admin.auth().verifyIdToken(req.headers.authorization);
-    const businessRef = admin.firestore().collection('businesses').doc(req.params.business);
-    const businessDoc = await businessRef.get();
-    if (!businessDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
-    if (!businessDoc.data().admins.includes(uid)) return res.sendStatus(status.UNAUTHORIZED);
+    if (!uid) return res.sendStatus(status.UNAUTHORIZED);
+    const customerRef = admin.firestore().collection('users').doc(uid);
+    const customerDoc = await customerRef.get();
+    if (!customerDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
 
     const orderRef = admin.firestore().collection('orders').doc(req.params.order);
     const orderDoc = await orderRef.get();
     if (!orderDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
 
-    if (orderDoc.data().customerStatus === 'declined') return res.sendStatus(status.UNAUTHORIZED);
+    if (uid !== orderDoc.data().customer.id) return res.sendStatus(status.UNAUTHORIZED);
+
+    if (orderDoc.data().businessStatus === 'declined') return res.sendStatus(status.UNAUTHORIZED);
 
     if (orderStatus === 'confirmed') {
       await orderRef.update({
-        businessStatus: 'confirmed'
+        customerStatus: 'confirmed',
+        status: 'confirmed'
       });
-      // Send text to user here
+      // Stripe and text shit here
     } else if(orderStatus === 'declined') {
       await orderRef.update({
-        businessStatus: 'declined',
+        customerStatus: 'declined',
         status: 'declined'
       });
       // Send text to user here

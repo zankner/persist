@@ -7,7 +7,10 @@ module.exports.users = {
 module.exports.businesses = {
   create: require('./business/create'),
   update: require('./business/update'),
-  get: require('./business/get')
+  get: require('./business/get'),
+  billing: {
+    create: require('./business/billing/create')
+  }
 };
 
 module.exports.orders = {

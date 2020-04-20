@@ -56,13 +56,19 @@ const product = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280';
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
   user.getIdToken().then((token) => {
-    axios.post(`http://localhost:3000/api/orders/${order}/customer/update`,
-      {orderStatus},
-      {headers: {Authorization: token}
-      }).then((res) => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err)
-    });
+    console.log(token)
+    const state = {
+      auth: token,
+      business
+    };
+    console.log(JSON.stringify(state));
+    // axios.post(`http://localhost:3000/api/orders/${order}/customer/update`,
+    //   {orderStatus},
+    //   {headers: {Authorization: token}
+    //   }).then((res) => {
+    //   console.log(res);
+    // }).catch(err => {
+    //   console.log(err)
+    // });
   });
 });

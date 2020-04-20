@@ -12,6 +12,7 @@ router.get('/users/:user/get', api.users.get);
 router.post('/businesses/create', api.businesses.create);
 router.post('/businesses/:business/update', api.businesses.update);
 router.get('/businesses/:business/get', api.businesses.get);
+router.get('/businesses/billing/create', api.businesses.billing.create);
 
 // Orders
 router.post('/orders/create', api.orders.create);

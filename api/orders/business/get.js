@@ -9,14 +9,17 @@ module.exports = async (req, res) => {
 
     const orderRef = admin.firestore().collection('orders').doc(req.params.order);
     const orderDoc = await orderRef.get();
-    if (!orderDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
+    const order = orderDoc.data();
+    if (!order) return res.sendStatus(status.UNAUTHORIZED);
 
     const businessRef = orderDoc.data().business;
     const businessDoc = await businessRef.get();
     if (!businessDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
     if (!businessDoc.data().admins.includes(uid)) return res.sendStatus(status.UNAUTHORIZED);
 
-    return res.send(orderDoc.data());
+    delete order.clientSecret;
+
+    return res.send(order);
   } catch(err) {
     console.log(err.message);
 

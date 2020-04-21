@@ -2,6 +2,8 @@
 const admin = require('firebase-admin');
 const status = require('http-status');
 const check = require('check-types');
+const stirpe = require('stripe')(process.env.TEST_STRIPE_SECRET);
+const _  = require('lodash');
 
 module.exports = async (req, res) => {
   const {business, products, dateOrdered, preferredDate} = req.body;
@@ -25,8 +27,34 @@ module.exports = async (req, res) => {
 
     const businessRef = admin.firestore().collection('businesses').doc(business);
     const businessDoc = await businessRef.get();
-    if (!businessDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
+    const business = businessDoc.data();
+    if (!business) return res.sendStatus(status.UNAUTHORIZED);
+    if (!business.billing.stripeAccount) return res.sendStatus(status.UNAUTHORIZED);
 
+    const productPrices = await Promise.all(products.map(productRef => productRef.get()
+      .then((productDoc) => {
+        const product = productDoc.data();
+        if (!product) return res.sendStatus(status.UNAUTHORIZED);
+
+        return product.price;
+      })
+    ));
+
+    const orderTotal = _.sum(productPrices);
+
+    const applicationFee = Math.round(.029 * (100 * orderTotal));
+    const businessAmount = orderTotal - applicationFee;
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      payment_method_types: ['card'],
+      amount: businessAmount,
+      currency: 'usd',
+      application_fee_amount: applicationFee
+    }, {
+      stripe_account: business.billing.stripeAccount
+    });
+
+    const clientSecret = paymentIntent.client_secret;
 
     const order = {
       business: businessRef,
@@ -37,7 +65,8 @@ module.exports = async (req, res) => {
       businessStatus: 'pending',
       preferredDate: preferredDate,
       finalDate: '',
-      customer: customerRef
+      customer: customerRef,
+      clientSecret
     };
 
     const orderId = `${uid}-${Date.now()}`;

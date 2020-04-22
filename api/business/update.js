@@ -5,7 +5,7 @@ const check = require('check-types');
 
 module.exports = async (req, res) => {
   const {email, name, address, number,
-    emailList, logo} = req.body;
+    emailList, logo, potentialAdmins} = req.body;
 
   try {
     check.assert.maybe.nonEmptyString(email);
@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
     check.assert.maybe.nonEmptyString(number);
     check.assert.maybe.nonEmptyString(logo);
     check.assert.maybe.array.of.nonEmptyString(emailList);
+    check.assert.maybe.array.of.nonEmptyString(potentialAdmins);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -35,6 +36,11 @@ module.exports = async (req, res) => {
     business.number = number || business.number;
     business.logo = logo || business.logo;
     business.emailList = emailList || business.emailList;
+    if (potentialAdmins) {
+      business.potentialAdmins.push(potentialAdmins.map((potentialAdmin) =>
+        admin.firestore().collection('users').doc(potentialAdmin)));
+      business.potentialAdmins = business.potentialAdmins.flat();
+    }
 
     await businessRef.update(business);
 

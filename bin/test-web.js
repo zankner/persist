@@ -32,9 +32,11 @@ const dataStreams = {
   spotify: 'VxWaQxPWI0MyKuhxe9RMrQQEvvx2-1584826355981'
 };
 
-const business = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587158946208';
+const business = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587586011461';
 
+// const products = [firebase.firestore().collection('products').doc('PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280')];
 const products = ['PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280'];
+
 const dateOrdered = moment().format();
 const customer = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2';
 const orderStatus = 'confirmed';
@@ -52,6 +54,8 @@ const finalDate = moment().format();
 
 const product = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280';
 
+const potentialAdmins = ['PuCxVsWkBMh0bvQiHVff4qjU3pr2'];
+
 
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
@@ -62,8 +66,8 @@ firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
     //   business
     // };
     // console.log(JSON.stringify(state));
-    axios.post(`http://localhost:3000/api/orders/create`,
-      {business, products, dateOrdered, preferredDate},
+    axios.post(`http://localhost:3000/api/businesses/${business}/update`,
+      {potentialAdmins},
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

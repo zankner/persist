@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
       requests: [],
       orders: [],
       billing: {},
-      pendingOwners: []
+      potentialAdmins: []
     };
 
     const businessId = `${uid}-${Date.now()}`;

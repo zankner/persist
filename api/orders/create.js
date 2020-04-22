@@ -32,8 +32,6 @@ module.exports = async (req, res) => {
 
     const productRefs = products.map(product => admin.firestore().collection('products').doc(product));
 
-    console.log(productRefs)
-
     const productPrices = await Promise.all(productRefs.map(productRef => productRef.get()
       .then((productDoc) => {
         const product = productDoc.data();
@@ -46,8 +44,8 @@ module.exports = async (req, res) => {
 
     const orderTotal = _.sum(productPrices);
 
-    const applicationFee = Math.round(.029 * (100 * orderTotal));
-    const businessAmount = orderTotal * 100 - applicationFee;
+    const applicationFee = Math.round(.029 * (orderTotal));
+    const businessAmount = orderTotal - applicationFee;
 
     const paymentIntent = await stripe.paymentIntents.create({
       payment_method_types: ['card'],

@@ -13,6 +13,7 @@ router.post('/businesses/create', api.businesses.create);
 router.post('/businesses/:business/update', api.businesses.update);
 router.get('/businesses/:business/get', api.businesses.get);
 router.get('/businesses/billing/create', api.businesses.billing.create);
+router.post('/businesses/:business/admins/update', api.businesses.admin.update);
 
 // Orders
 router.post('/orders/create', api.orders.create);

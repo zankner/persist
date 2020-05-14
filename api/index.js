@@ -10,6 +10,9 @@ module.exports.businesses = {
   get: require('./business/get'),
   billing: {
     create: require('./business/billing/create')
+  },
+  admin: {
+    update: require('./business/admin/update')
   }
 };
 

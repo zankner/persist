@@ -1,6 +1,7 @@
 const status = require('http-status');
 const admin = require('firebase-admin');
 const check = require('check-types');
+const _ = require('lodash');
 
 
 module.exports = async (req, res) => {
@@ -37,9 +38,8 @@ module.exports = async (req, res) => {
     business.logo = logo || business.logo;
     business.emailList = emailList || business.emailList;
     if (potentialAdmins) {
-      business.potentialAdmins.push(potentialAdmins.map((potentialAdmin) =>
-        admin.firestore().collection('users').doc(potentialAdmin)));
-      business.potentialAdmins = business.potentialAdmins.flat();
+      business.potentialAdmins.push(potentialAdmins);
+      business.potentialAdmins = _.uniq(business.potentialAdmins.flat());
     }
 
     await businessRef.update(business);

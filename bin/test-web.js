@@ -56,6 +56,8 @@ const product = 'PuCxVsWkBMh0bvQiHVff4qjU3pr2-1587184211280';
 
 const potentialAdmins = ['PuCxVsWkBMh0bvQiHVff4qjU3pr2'];
 
+const adminStatus = 'confirmed';
+
 
 firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
   const { user } = result;
@@ -66,8 +68,8 @@ firebase.auth().signInWithEmailAndPassword(email, pswd).then((result) => {
     //   business
     // };
     // console.log(JSON.stringify(state));
-    axios.post(`http://localhost:3000/api/businesses/${business}/update`,
-      {potentialAdmins},
+    axios.post(`http://localhost:3000/api/businesses/${business}/admins/update`,
+      {adminStatus},
       {headers: {Authorization: token}
       }).then((res) => {
       console.log(res);

@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Swiper from 'react-id-swiper';
 
 const Home = props => {
   return (
@@ -51,6 +52,193 @@ const Home = props => {
           </form>
         </div>
       </div>
+      <section className="py-6 bg-gray-100">
+        <div className="container">
+          <div className="text-center pb-lg-4">
+            <p className="subtitle text-secondary">Try something new today</p>
+            <h2 className="mb-5">Popular places around you</h2>
+          </div>
+        </div>
+        <div className="container-fluid">
+          <Swiper
+            containerClass="swiper-container"
+            slidesPerView={5}
+            spacebetween={20}
+            loop={true}
+            roundLengths
+            breakpoints={{
+              1600: { slidesPerView: 5 },
+              1400: { slidesPerView: 4 },
+              1200: { slidesPerView: 3 },
+              991: { slidesPerView: 2 },
+              565: { slidesPerView: 1 },
+            }}
+          >
+            <div className="h-auto hover-animate px-2 my-3">
+              <div className="card h-100 border-0 shadow">
+                <div className="card-img-top overflow-hidden dark-overlay bg-cover"
+                     style={{backgroundImage: 'url(img/photo/restaurant-1430931071372-38127bd472b8.jpg)', minHeight: "200px"}}>
+                  <a className="tile-link" href="detail.html"></a>
+                  <div className="card-img-overlay-bottom z-index-20">
+                    <h4 className="text-white text-shadow">Blue Hill</h4>
+                    <p className="mb-2 text-xs"><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-gray-300"> </i>
+                    </p>
+                  </div>
+                  <div className="card-img-overlay-top d-flex justify-content-between align-items-center">
+                    <div className="badge badge-transparent badge-pill px-3 py-2">Restaurants</div>
+                    <a className="card-fav-icon position-relative z-index-40" href="#">
+                      <svg className="svg-icon text-white">
+                        <use xlinkHref="#heart-1"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <p className="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam
+                    dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>
+                  <p className="text-sm text-muted text-uppercase mb-1">By <a href="#" className="text-dark">Matt
+                    Damon</a></p>
+                  <p className="text-sm mb-0"><a className="mr-1" href="#">Restaurant,</a><a className="mr-1"
+                                                                                             href="#">Contemporary</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="h-auto hover-animate px-2 my-3">
+              <div className="card h-100 border-0 shadow">
+                <div className="card-img-top overflow-hidden dark-overlay bg-cover"
+                     style={{backgroundImage: 'url(img/photo/restaurant-1430931071372-38127bd472b8.jpg)', minHeight: "200px"}}>
+                  <a className="tile-link" href="detail.html"></a>
+                  <div className="card-img-overlay-bottom z-index-20">
+                    <h4 className="text-white text-shadow">Blue Hill</h4>
+                    <p className="mb-2 text-xs"><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-gray-300"> </i>
+                    </p>
+                  </div>
+                  <div className="card-img-overlay-top d-flex justify-content-between align-items-center">
+                    <div className="badge badge-transparent badge-pill px-3 py-2">Restaurants</div>
+                    <a className="card-fav-icon position-relative z-index-40" href="#">
+                      <svg className="svg-icon text-white">
+                        <use xlinkHref="#heart-1"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <p className="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam
+                    dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>
+                  <p className="text-sm text-muted text-uppercase mb-1">By <a href="#" className="text-dark">Matt
+                    Damon</a></p>
+                  <p className="text-sm mb-0"><a className="mr-1" href="#">Restaurant,</a><a className="mr-1"
+                                                                                             href="#">Contemporary</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="h-auto hover-animate px-2 my-3">
+              <div className="card h-100 border-0 shadow">
+                <div className="card-img-top overflow-hidden dark-overlay bg-cover"
+                     style={{backgroundImage: 'url(img/photo/restaurant-1430931071372-38127bd472b8.jpg)', minHeight: "200px"}}>
+                  <a className="tile-link" href="detail.html"></a>
+                  <div className="card-img-overlay-bottom z-index-20">
+                    <h4 className="text-white text-shadow">Blue Hill</h4>
+                    <p className="mb-2 text-xs"><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-gray-300"> </i>
+                    </p>
+                  </div>
+                  <div className="card-img-overlay-top d-flex justify-content-between align-items-center">
+                    <div className="badge badge-transparent badge-pill px-3 py-2">Restaurants</div>
+                    <a className="card-fav-icon position-relative z-index-40" href="#">
+                      <svg className="svg-icon text-white">
+                        <use xlinkHref="#heart-1"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <p className="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam
+                    dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>
+                  <p className="text-sm text-muted text-uppercase mb-1">By <a href="#" className="text-dark">Matt
+                    Damon</a></p>
+                  <p className="text-sm mb-0"><a className="mr-1" href="#">Restaurant,</a><a className="mr-1"
+                                                                                             href="#">Contemporary</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="h-auto hover-animate px-2 my-3">
+              <div className="card h-100 border-0 shadow">
+                <div className="card-img-top overflow-hidden dark-overlay bg-cover"
+                     style={{backgroundImage: 'url(img/photo/restaurant-1430931071372-38127bd472b8.jpg)', minHeight: "200px"}}>
+                  <a className="tile-link" href="detail.html"></a>
+                  <div className="card-img-overlay-bottom z-index-20">
+                    <h4 className="text-white text-shadow">Blue Hill</h4>
+                    <p className="mb-2 text-xs"><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-gray-300"> </i>
+                    </p>
+                  </div>
+                  <div className="card-img-overlay-top d-flex justify-content-between align-items-center">
+                    <div className="badge badge-transparent badge-pill px-3 py-2">Restaurants</div>
+                    <a className="card-fav-icon position-relative z-index-40" href="#">
+                      <svg className="svg-icon text-white">
+                        <use xlinkHref="#heart-1"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <p className="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam
+                    dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>
+                  <p className="text-sm text-muted text-uppercase mb-1">By <a href="#" className="text-dark">Matt
+                    Damon</a></p>
+                  <p className="text-sm mb-0"><a className="mr-1" href="#">Restaurant,</a><a className="mr-1"
+                                                                                             href="#">Contemporary</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="h-auto hover-animate px-2 my-3">
+              <div className="card h-100 border-0 shadow">
+                <div className="card-img-top overflow-hidden dark-overlay bg-cover"
+                     style={{backgroundImage: 'url(img/photo/restaurant-1430931071372-38127bd472b8.jpg)', minHeight: "200px"}}>
+                  <a className="tile-link" href="detail.html"></a>
+                  <div className="card-img-overlay-bottom z-index-20">
+                    <h4 className="text-white text-shadow">Blue Hill</h4>
+                    <p className="mb-2 text-xs"><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-warning"></i><i
+                      className="fa fa-star text-warning"></i><i className="fa fa-star text-gray-300"> </i>
+                    </p>
+                  </div>
+                  <div className="card-img-overlay-top d-flex justify-content-between align-items-center">
+                    <div className="badge badge-transparent badge-pill px-3 py-2">Restaurants</div>
+                    <a className="card-fav-icon position-relative z-index-40" href="#">
+                      <svg className="svg-icon text-white">
+                        <use xlinkHref="#heart-1"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <p className="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam
+                    dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>
+                  <p className="text-sm text-muted text-uppercase mb-1">By <a href="#" className="text-dark">Matt
+                    Damon</a></p>
+                  <p className="text-sm mb-0"><a className="mr-1" href="#">Restaurant,</a><a className="mr-1"
+                                                                                             href="#">Contemporary</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Swiper>
+          <div className="text-center mt-5"><a className="btn btn-outline-primary" href="category-2.html">See all
+            places</a></div>
+        </div>
+      </section>
     </Layout>
   );
 };

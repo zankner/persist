@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import Home from '../../src/pages';
+import Home from '../../src/pages/Home/Home';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -56,7 +56,6 @@ render(
 					<Route exact path='/' component={Home} />
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/signup' component={Signup} />
-
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

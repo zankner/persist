@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer'
 
 const Layout = props => (
 	<React.Fragment>
-		<nav className="navbar navbar-dark bg-dark fixed-top">
-			<Link to="/" className="navbar-brand"><h2 className="header">App</h2></Link>
-		</nav>
+		<Header />
 		{props.children}
+		<Footer />
 	</React.Fragment>
 );
 

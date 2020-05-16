@@ -13,6 +13,7 @@ import rootReducer from '../../modules/reducers';
 import '@firebase/firestore';
 import '@firebase/auth';
 import '@firebase/storage';
+import Search from '../../src/pages/Search/Search';
 import Login from '../../src/pages/login';
 import Signup from '../../src/pages/signup';
 
@@ -56,6 +57,7 @@ render(
 					<Route exact path='/' component={Home} />
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/signup' component={Signup} />
+					<Route exact path='/search' component={Search} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

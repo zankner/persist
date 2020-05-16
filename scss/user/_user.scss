@@ -1,1 +1,9 @@
 // this is the place for your components / CSS
+
+.navbar {
+  min-height: $navbarHeight;
+}
+
+.pt-nav {
+  padding-top: $navbarHeight
+}

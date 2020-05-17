@@ -5,7 +5,7 @@ import { withFirebase } from 'react-redux-firebase';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Swiper from 'react-id-swiper';
-import Filters from './Filters';
+import Filters from './Components/Filters';
 
 const Search = props => {
   return (

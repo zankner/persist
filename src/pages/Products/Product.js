@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Preview from './Components/Preview';
+import Carousel from "react-bootstrap/Carousel";
+import {CarouselProvider} from "pure-react-carousel";
 
 
 const Product = props => {
+
   return (
     <Layout>
       <div className="container pt-nav pb-5">

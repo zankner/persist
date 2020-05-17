@@ -7,3 +7,37 @@
 .pt-nav {
   padding-top: $navbarHeight
 }
+
+.product-dot {
+  display: block;
+  max-width: 100%;
+  background: none;
+  border: none;
+  opacity: 0.5;
+  cursor: pointer;
+  outline: none !important;
+  padding: 0;
+
+  &.active {
+    opacity: 1 !important;
+  }
+}
+
+.product-dot:active,
+.product-dot:focus,
+.product-dot:target,
+.product-dot:active:focus {
+  opacity: 1;
+}
+
+.carousel__dot--selected {
+  opacity: 1;
+}
+
+.horizontal-dot-group {
+  max-height: 50px;
+}
+
+.horizontal-product-dot {
+  max-height: 50px;
+}

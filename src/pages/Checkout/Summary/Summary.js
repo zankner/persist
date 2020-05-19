@@ -12,7 +12,7 @@ const Summary = props => {
     <Layout >
       <div className="pt-nav">
         <div className="progress rounded-0 sticky-top" style={{height: "8px", top: "71px"}}>
-          <div className="progress-bar" role="progressbar" style={{width: "25%", ariaValuenow: "25", ariaValuemin: "0"}} aria-valuemax="100"/>
+          <div className="progress-bar" role="progressbar" style={{width: "33%", ariaValuenow: "25", ariaValuemin: "0"}} aria-valuemax="100"/>
         </div>
         <section className="py-5">
           <div className="container">

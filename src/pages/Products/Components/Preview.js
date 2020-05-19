@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Swiper from 'react-id-swiper';
+import React, { useState, useEffect, useCallback } from 'react';
+import Swiper from './Swiper';
 
 
 const Preview = props => {
@@ -7,6 +7,36 @@ const Preview = props => {
   const imgs = ["/img/photo/photo-1426122402199-be02db90eb90.jpg", "/img/photo/photo-1488805990569-3c9e1d76d51c.jpg", "/img/photo/photo-1494526585095-c41746248156.jpg"];
 
   const [index, setIndex] = useState('0');
+  const [swiper, setSwiper] = useState(0);
+
+  const swiperParams = {
+    activeSlideKey: index,
+    slidesPerView: 1,
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination.d-md-none',
+      clickable: true,
+      dynamicBullets: true
+    },
+    getSwiper: props => {
+      console.log(props);
+      setSwiper(props)
+    },
+    on: {
+      slideChangeTransitionEnd: () => {
+        // console.log(swiper)
+        if(swiper !== null) {
+          console.log('called')
+          console.log(swiper.realIndex)
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    console.log("*");
+    console.log(swiper);
+  }, [swiper]);
 
   const handleDotClick = dotIndex => {
     setIndex(dotIndex.toString());
@@ -22,27 +52,7 @@ const Preview = props => {
         ))}
       </div>
       <div className="col-12 col-md-10">
-        <Swiper
-          activeSlideKey={index}
-          slidesPerView={1}
-          spacebetween={2}
-          loop={true}
-          pagination={{
-            el: '.swiper-pagination.d-md-none',
-            clickable: true,
-            dynamicBullets: true,
-          }}
-        >
-          <div key='0' className="swiper-slide"><img className="img-fluid"
-                                                     src="/img/photo/photo-1426122402199-be02db90eb90.jpg"
-                                                     alt="Our street"/></div>
-          <div key='1' className="swiper-slide"><img className="img-fluid"
-                                                     src="/img/photo/photo-1512917774080-9991f1c4c750.jpg"
-                                                     alt="Our street"/></div>
-          <div key='2' className="swiper-slide"><img className="img-fluid"
-                                                     src="/img/photo/photo-1494526585095-c41746248156.jpg"
-                                                     alt="Our street"/></div>
-        </Swiper>
+        <Swiper imgs={imgs} swiperParams={swiperParams} />
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ import Search from '../../src/pages/Search/Search';
 import Login from '../../src/pages/login';
 import Signup from '../../src/pages/signup';
 import Product from '../../src/pages/Products/Product'
+import Summary from '../../src/pages/Checkout/Summary/Summary'
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -60,6 +61,7 @@ render(
 					<Route exact path='/signup' component={Signup} />
 					<Route exact path='/search' component={Search} />
 					<Route exact path='/products/:product' component={Product} />
+					<Route exact path='/checkout/summary' component={Summary} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

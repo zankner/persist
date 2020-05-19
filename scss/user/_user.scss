@@ -17,27 +17,15 @@
   cursor: pointer;
   outline: none !important;
   padding: 0;
-
-  &.active {
-    opacity: 1 !important;
-  }
 }
 
-.product-dot:active,
-.product-dot:focus,
-.product-dot:target,
-.product-dot:active:focus {
-  opacity: 1;
+.product-dot-active {
+  opacity: 1 !important;
 }
-
-.carousel__dot--selected {
-  opacity: 1;
-}
-
-.horizontal-dot-group {
-  max-height: 50px;
-}
-
-.horizontal-product-dot {
-  max-height: 50px;
-}
+//
+//.product-dot:active,
+//.product-dot:focus,
+//.product-dot:target,
+//.product-dot:active:focus {
+//  opacity: 1;
+//}

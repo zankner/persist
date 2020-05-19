@@ -19,7 +19,7 @@ const Product = props => {
             <div className="text-block">
               <p className="text-primary"><i className="fa-map-marker-alt fa mr-1"></i> Brooklyn, New York</p>
               <h1>Mid-Century Modern Garden Paradise</h1>
-              <Preview numSlides={3}/>
+              <Preview numSlides={3} classNam="mb-5"/>
               <p className="text-muted text-uppercase mb-4">Entire Apartment </p>
               <ul className="list-inline text-sm mb-4">
                 <li className="list-inline-item mr-3"><i className="fa fa-users mr-1 text-secondary"></i> 4 guests</li>

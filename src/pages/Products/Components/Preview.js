@@ -14,6 +14,7 @@ const Preview = props => {
     activeSlideKey: index,
     slidesPerView: 1,
     loop: true,
+    containerClass: "swiper-container pb-5",
     pagination: {
       el: '.swiper-pagination.d-md-none',
       clickable: true,
@@ -46,7 +47,7 @@ const Preview = props => {
   };
 
   return (
-    <div className="row">
+    <div className="row mb-5">
       <div className="col-md-2 pr-0 d-none d-md-block">
         {imgs.map((im, i) => (
           <button onClick={() => handleDotClick(i)} className={`product-dot ${(i.toString() === index) ? "product-dot-active" : ""}`}>

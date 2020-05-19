@@ -7,7 +7,8 @@ const Preview = props => {
   const imgs = ["/img/photo/photo-1426122402199-be02db90eb90.jpg", "/img/photo/photo-1488805990569-3c9e1d76d51c.jpg", "/img/photo/photo-1494526585095-c41746248156.jpg"];
 
   const [index, setIndex] = useState('0');
-  const [swiper, setSwiper] = useState(0);
+  const [swiper, setSwiper] = useState(null);
+
 
   const swiperParams = {
     activeSlideKey: index,
@@ -19,24 +20,26 @@ const Preview = props => {
       dynamicBullets: true
     },
     getSwiper: props => {
-      console.log(props);
       setSwiper(props)
-    },
-    on: {
-      slideChangeTransitionEnd: () => {
-        // console.log(swiper)
-        if(swiper !== null) {
-          console.log('called')
-          console.log(swiper.realIndex)
-        }
-      }
     }
   };
 
+  const updateIndex = useCallback(() => {
+    setIndex(swiper.realIndex.toString());
+  }, [swiper])
+
   useEffect(() => {
-    console.log("*");
-    console.log(swiper);
-  }, [swiper]);
+    if (swiper !== null) {
+      swiper.on("slideChange", updateIndex)
+    }
+
+    return () => {
+      if (swiper !== null) {
+        swiper.off("slideChange", updateIndex);
+      }
+    }
+  }, [swiper, updateIndex])
+
 
   const handleDotClick = dotIndex => {
     setIndex(dotIndex.toString());

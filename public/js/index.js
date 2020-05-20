@@ -31,6 +31,7 @@ import BusinessOrders from '../../src/pages/Businesses/Orders/Orders';
 import Business from '../../src/pages/Businesses/Business/Business';
 import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
+import UserOrders from '../../src/pages/User/Orders/Orders';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -88,6 +89,7 @@ render(
 					<Route exact path='/businesses/:business/orders' component={BusinessOrders} />
 					<Route exact path='/users/:user' component={User} />
 					<Route exact path='/users/:user/personal-info' component={PersonalInfo} />
+					<Route exact path='/users/:user/orders' component={UserOrders} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

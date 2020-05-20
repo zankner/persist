@@ -29,6 +29,7 @@ import BusinessCompletion from '../../src/pages/Businesses/Create/Completion/Com
 import Businesses from '../../src/pages/Businesses/Businesses';
 import BusinessOrders from '../../src/pages/Businesses/Orders/Orders';
 import Business from '../../src/pages/Businesses/Business/Business';
+import User from '../../src/pages/User/User';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -84,6 +85,7 @@ render(
 					<Route exact path='/businesses' component={Businesses} />
 					<Route exact path='/businesses/:business' component={Business} />
 					<Route exact path='/businesses/:business/orders' component={BusinessOrders} />
+					<Route exact path='/users/:user' component={User} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

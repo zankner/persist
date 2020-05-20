@@ -23,7 +23,9 @@ import Completion from '../../src/pages/Checkout/Completion/Completion';
 import CreateBusiness from '../../src/pages/Businesses/Create/Create';
 import BusinessBackground from '../../src/pages/Businesses/Create/Background/Background';
 import BusinessDescription from '../../src/pages/Businesses/Create/Description/Description';
-import BusinessSpecifics from '../../src/pages/Businesses/Create/Specifics/Specifics'
+import BusinessSpecifics from '../../src/pages/Businesses/Create/Specifics/Specifics';
+import BusinessPhotos from '../../src/pages/Businesses/Create/Photos/Photos';
+import BusinessCompletion from '../../src/pages/Businesses/Create/Completion/Completion';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -74,6 +76,8 @@ render(
 					<Route exact path='/business/create/background' component={BusinessBackground} />
 					<Route exact path='/business/create/description' component={BusinessDescription} />
 					<Route exact path='/business/create/specifics' component={BusinessSpecifics} />
+					<Route exact path='/business/create/photos' component={BusinessPhotos} />
+					<Route exact path='/business/create/completion' component={BusinessCompletion} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

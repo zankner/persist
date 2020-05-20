@@ -16,10 +16,12 @@ import '@firebase/storage';
 import Search from '../../src/pages/Search/Search';
 import Login from '../../src/pages/login';
 import Signup from '../../src/pages/signup';
-import Product from '../../src/pages/Products/Product'
-import Summary from '../../src/pages/Checkout/Summary/Summary'
-import Payment from '../../src/pages/Checkout/Payment/Payment'
-import Completion from '../../src/pages/Checkout/Completion/Completion'
+import Product from '../../src/pages/Products/Product';
+import Summary from '../../src/pages/Checkout/Summary/Summary';
+import Payment from '../../src/pages/Checkout/Payment/Payment';
+import Completion from '../../src/pages/Checkout/Completion/Completion';
+import CreateBusiness from '../../src/pages/Businesses/Create/Create';
+import BusinessBackground from '../../src/pages/Businesses/Create/Background/Background';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -66,6 +68,8 @@ render(
 					<Route exact path='/checkout/summary' component={Summary} />
 					<Route exact path='/checkout/payment' component={Payment} />
 					<Route exact path='/checkout/completion' component={Completion} />
+					<Route exact path='/business/create' component={CreateBusiness} />
+					<Route exact path='/business/create/background' component={BusinessBackground} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

@@ -27,11 +27,12 @@ import BusinessSpecifics from '../../src/pages/Businesses/Create/Specifics/Speci
 import BusinessPhotos from '../../src/pages/Businesses/Create/Photos/Photos';
 import BusinessCompletion from '../../src/pages/Businesses/Create/Completion/Completion';
 import Businesses from '../../src/pages/Businesses/Businesses';
-import BusinessOrders from '../../src/pages/Businesses/Orders/Orders';
 import Business from '../../src/pages/Businesses/Business/Business';
+import BusinessOrders from '../../src/pages/Orders/Business/Orders/Orders';
 import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
-import UserOrders from '../../src/pages/Orders/Users/Orders';
+import UserOrders from '../../src/pages/Orders/Users/Orders/Orders';
+import Cart from '../../src/pages/Cart/Cart';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -90,6 +91,7 @@ render(
 					<Route exact path='/users/:user' component={User} />
 					<Route exact path='/users/:user/personal-info' component={PersonalInfo} />
 					<Route exact path='/users/:user/orders' component={UserOrders} />
+					<Route exact path='/cart' component={Cart} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

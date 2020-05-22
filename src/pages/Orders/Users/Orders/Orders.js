@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Layout from '../../../components/Layout';
+import Layout from '../../../../components/Layout';
 import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
 import { withRouter } from 'react-router-dom';

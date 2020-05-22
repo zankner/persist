@@ -31,7 +31,7 @@ import BusinessOrders from '../../src/pages/Businesses/Orders/Orders';
 import Business from '../../src/pages/Businesses/Business/Business';
 import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
-import UserOrders from '../../src/pages/User/Orders/Orders';
+import UserOrders from '../../src/pages/Orders/Users/Orders';
 
 // Initialize Firebase
 const firebaseConfig = {

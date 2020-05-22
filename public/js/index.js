@@ -15,7 +15,7 @@ import '@firebase/auth';
 import '@firebase/storage';
 import Search from '../../src/pages/Search/Search';
 import Login from '../../src/pages/Login/Login';
-import Signup from '../../src/pages/signup';
+import Signup from '../../src/pages/Signup/Signup';
 import Product from '../../src/pages/Products/Product';
 import Summary from '../../src/pages/Checkout/Summary/Summary';
 import Payment from '../../src/pages/Checkout/Payment/Payment';

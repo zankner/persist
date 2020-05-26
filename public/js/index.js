@@ -33,6 +33,7 @@ import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
 import UserOrders from '../../src/pages/Orders/Users/Orders/Orders';
 import UserOrder from '../../src/pages/Orders/Users/Orders/Order/Order';
+import UserBilling from '../../src/pages/User/Billing/Billing';
 import Cart from '../../src/pages/Cart/Cart';
 
 // Initialize Firebase
@@ -91,6 +92,7 @@ render(
 					<Route exact path='/businesses/admin/:business/orders' component={BusinessOrders} />
 					<Route exact path='/users/:user' component={User} />
 					<Route exact path='/users/:user/personal-info' component={PersonalInfo} />
+					<Route exact path='/users/:user/billing' component={UserBilling} />
 					<Route exact path='/users/:user/orders' component={UserOrders} />
 					<Route exact path='/users/:user/orders/:order' component={UserOrder} />
 					<Route exact path='/cart' component={Cart} />

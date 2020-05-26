@@ -38,6 +38,12 @@ import ProductDescription from '../../src/pages/Products/Create/Description/Desc
 import ProductSpecifics from '../../src/pages/Products/Create/Specifics/Specifics';
 import ProductPhotos from '../../src/pages/Products/Create/Photos/Photos';
 import ProductCompletion from '../../src/pages/Products/Create/Completion/Completion';
+import EditProduct from '../../src/pages/Products/Edit/Edit';
+import EditProductBackground from '../../src/pages/Products/Edit/Background/Background';
+import EditProductDescription from '../../src/pages/Products/Edit/Description/Description';
+import EditProductSpecifics from '../../src/pages/Products/Edit/Specifics/Specifics';
+import EditProductPhotos from '../../src/pages/Products/Edit/Photos/Photos';
+import EditProductCompletion from '../../src/pages/Products/Edit/Completion/Completion';
 import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
 import UserOrders from '../../src/pages/Orders/Users/Orders/Orders';
@@ -108,6 +114,12 @@ render(
 					<Route exact path='/product/create/specifics' component={ProductSpecifics} />
 					<Route exact path='/product/create/photos' component={ProductPhotos} />
 					<Route exact path='/product/create/completion' component={ProductCompletion} />
+					<Route exact path='/products/:product/edit' component={EditProduct} />
+					<Route exact path='/products/:product/background' component={EditProductBackground} />
+					<Route exact path='/products/:product/description' component={EditProductDescription} />
+					<Route exact path='/products/:product/specifics' component={EditProductSpecifics} />
+					<Route exact path='/products/:product/photos' component={EditProductPhotos} />
+					<Route exact path='/products/:product/completion' component={EditProductCompletion} />
 					<Route exact path='/users/:user' component={User} />
 					<Route exact path='/users/:user/personal-info' component={PersonalInfo} />
 					<Route exact path='/users/:user/billing' component={UserBilling} />

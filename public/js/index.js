@@ -31,6 +31,7 @@ import Business from '../../src/pages/Businesses/Business/Business';
 import BusinessBilling from '../../src/pages/Businesses/Admin/Business/Billing/Billing';
 import BusinessOrders from '../../src/pages/Orders/Business/Orders/Orders';
 import BusinessProducts from '../../src/pages/Products/Business/Products/Products';
+import BusinessProduct from '../../src/pages/Products/Business/Products/Product/Product';
 import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
 import UserOrders from '../../src/pages/Orders/Users/Orders/Orders';
@@ -94,6 +95,7 @@ render(
 					<Route exact path='/businesses/:business/admin/orders' component={BusinessOrders} />
 					<Route exact path='/businesses/:business/admin/billing' component={BusinessBilling} />
 					<Route exact path='/businesses/:business/admin/products' component={BusinessProducts} />
+					<Route exact path='/businesses/:business/admin/products/:product' component={BusinessProduct} />
 					<Route exact path='/users/:user' component={User} />
 					<Route exact path='/users/:user/personal-info' component={PersonalInfo} />
 					<Route exact path='/users/:user/billing' component={UserBilling} />

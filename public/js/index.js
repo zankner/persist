@@ -32,6 +32,12 @@ import BusinessBilling from '../../src/pages/Businesses/Admin/Business/Billing/B
 import BusinessOrders from '../../src/pages/Orders/Business/Orders/Orders';
 import BusinessProducts from '../../src/pages/Products/Business/Products/Products';
 import BusinessProduct from '../../src/pages/Products/Business/Products/Product/Product';
+import CreateProduct from '../../src/pages/Products/Create/Create';
+import ProductBackground from '../../src/pages/Products/Create/Background/Background';
+import ProductDescription from '../../src/pages/Products/Create/Description/Description';
+import ProductSpecifics from '../../src/pages/Products/Create/Specifics/Specifics';
+import ProductPhotos from '../../src/pages/Products/Create/Photos/Photos';
+import ProductCompletion from '../../src/pages/Products/Create/Completion/Completion';
 import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
 import UserOrders from '../../src/pages/Orders/Users/Orders/Orders';
@@ -96,6 +102,12 @@ render(
 					<Route exact path='/businesses/:business/admin/billing' component={BusinessBilling} />
 					<Route exact path='/businesses/:business/admin/products' component={BusinessProducts} />
 					<Route exact path='/businesses/:business/admin/products/:product' component={BusinessProduct} />
+					<Route exact path='/product/create' component={CreateProduct} />
+					<Route exact path='/product/create/background' component={ProductBackground} />
+					<Route exact path='/product/create/description' component={ProductDescription} />
+					<Route exact path='/product/create/specifics' component={ProductSpecifics} />
+					<Route exact path='/product/create/photos' component={ProductPhotos} />
+					<Route exact path='/product/create/completion' component={ProductCompletion} />
 					<Route exact path='/users/:user' component={User} />
 					<Route exact path='/users/:user/personal-info' component={PersonalInfo} />
 					<Route exact path='/users/:user/billing' component={UserBilling} />

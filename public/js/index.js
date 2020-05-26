@@ -16,7 +16,7 @@ import '@firebase/storage';
 import Search from '../../src/pages/Search/Search';
 import Login from '../../src/pages/Login/Login';
 import Signup from '../../src/pages/Signup/Signup';
-import Product from '../../src/pages/Products/Product';
+import Product from '../../src/pages/Products/Shopper/Product/Product';
 import Summary from '../../src/pages/Checkout/Summary/Summary';
 import Payment from '../../src/pages/Checkout/Payment/Payment';
 import Completion from '../../src/pages/Checkout/Completion/Completion';
@@ -28,7 +28,9 @@ import BusinessPhotos from '../../src/pages/Businesses/Create/Photos/Photos';
 import BusinessCompletion from '../../src/pages/Businesses/Create/Completion/Completion';
 import Businesses from '../../src/pages/Businesses/Businesses';
 import Business from '../../src/pages/Businesses/Business/Business';
+import BusinessBilling from '../../src/pages/Businesses/Admin/Business/Billing/Billing';
 import BusinessOrders from '../../src/pages/Orders/Business/Orders/Orders';
+import BusinessProducts from '../../src/pages/Products/Business/Products/Products';
 import User from '../../src/pages/User/User';
 import PersonalInfo from '../../src/pages/User/PersonalInfo/PersonalInfo';
 import UserOrders from '../../src/pages/Orders/Users/Orders/Orders';
@@ -89,7 +91,9 @@ render(
 					<Route exact path='/business/create/completion' component={BusinessCompletion} />
 					<Route exact path='/businesses' component={Businesses} />
 					<Route exact path='/businesses/:business' component={Business} />
-					<Route exact path='/businesses/admin/:business/orders' component={BusinessOrders} />
+					<Route exact path='/businesses/:business/admin/orders' component={BusinessOrders} />
+					<Route exact path='/businesses/:business/admin/billing' component={BusinessBilling} />
+					<Route exact path='/businesses/:business/admin/products' component={BusinessProducts} />
 					<Route exact path='/users/:user' component={User} />
 					<Route exact path='/users/:user/personal-info' component={PersonalInfo} />
 					<Route exact path='/users/:user/billing' component={UserBilling} />

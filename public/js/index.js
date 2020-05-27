@@ -33,6 +33,10 @@ import BusinessOrders from '../../src/pages/Orders/Business/Orders/Orders';
 import BusinessProducts from '../../src/pages/Products/Business/Products/Products';
 import BusinessProduct from '../../src/pages/Products/Business/Products/Product/Product';
 import AdminBusiness from '../../src/pages/Businesses/Admin/Business/Business';
+import AdminBusinessBackground from '../../src/pages/Businesses/Admin/Business/Background/Background';
+import AdminBusinessDescription from '../../src/pages/Businesses/Admin/Business/Description/Description';
+import AdminBusinessSpecifics from '../../src/pages/Businesses/Admin/Business/Specifics/Specifics';
+import AdminBusinessPhotos from '../../src/pages/Businesses/Admin/Business/Photos/Photos';
 import CreateProduct from '../../src/pages/Products/Create/Create';
 import ProductBackground from '../../src/pages/Products/Create/Background/Background';
 import ProductDescription from '../../src/pages/Products/Create/Description/Description';
@@ -109,6 +113,10 @@ render(
 					<Route exact path='/businesses/:business/admin/orders' component={BusinessOrders} />
 					<Route exact path='/businesses/:business/admin/billing' component={BusinessBilling} />
 					<Route exact path='/businesses/:business/admin/products' component={BusinessProducts} />
+					<Route exact path='/businesses/:business/admin/background' component={AdminBusinessBackground} />
+					<Route exact path='/businesses/:business/admin/description' component={AdminBusinessDescription} />
+					<Route exact path='/businesses/:business/admin/specifics' component={AdminBusinessSpecifics} />
+					<Route exact path='/businesses/:business/admin/photos' component={AdminBusinessPhotos} />
 					<Route exact path='/businesses/:business/admin/products/:product' component={BusinessProduct} />
 					<Route exact path='/product/create' component={CreateProduct} />
 					<Route exact path='/product/create/background' component={ProductBackground} />

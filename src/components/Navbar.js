@@ -18,9 +18,7 @@ const Navbar = () => (
         </div>
       </form>
       <ul className="navbar-nav ml-auto">
-        <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
-        <li className="nav-item"><Link to="/about" className="nav-link">About</Link></li>
-        <li className="nav-item"><Link to="/business" className="nav-link">Add Your Business</Link></li>
+        <li className="nav-item"><Link to="/business" className="nav-link">List your business</Link></li>
         <li className="nav-item"><Link to="/cart" className="nav-link"><i className="fas fa-shopping-cart fa-lg"/></Link></li>
       </ul>
     </div>

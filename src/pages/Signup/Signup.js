@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import SignupForm from "./components/SignupForm";
 
 
 const Signup = props => {
@@ -18,34 +19,7 @@ const Signup = props => {
               <p className="text-muted">His room, a proper human room although a little too small, lay peacefully
                 between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
             </div>
-            <form className="form-validate">
-              <div className="form-group">
-                <label className="form-label" htmlFor="loginUsername"> Email Address</label>
-                <input className="form-control" name="loginUsername" id="loginUsername" type="email"
-                       placeholder="name@address.com" autoComplete="off" required data-msg="Please enter your email" />
-              </div>
-              <div className="form-group">
-                <label className="form-label" htmlFor="loginPassword"> Password</label>
-                <input className="form-control" name="loginPassword" id="loginPassword" placeholder="Password"
-                       type="password" required data-msg="Please enter your password" />
-              </div>
-              <div className="form-group mb-4">
-                <label className="form-label" htmlFor="loginPassword2"> Confirm your password</label>
-                <input className="form-control" name="loginPassword2" id="loginPassword2" placeholder="Password"
-                       type="password" required data-msg="Please enter your password" />
-              </div>
-              <button className="btn btn-lg btn-block btn-primary" type="submit">Sign up</button>
-              <hr className="my-3 hr-text letter-spacing-2" data-content="OR" />
-                <button className="btn btn btn-outline-primary btn-block btn-social mb-3"><i
-                  className="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span className="d-none d-sm-inline">with Facebook</span>
-                </button>
-                <button className="btn btn btn-outline-muted btn-block btn-social mb-3"><i
-                  className="fa-2x fa-google fab btn-social-icon"> </i>Connect <span className="d-none d-sm-inline">with Google</span>
-                </button>
-                <hr className="my-4" />
-                  <p className="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and
-                    Conditions</a> and <a href="#">Privacy Policy</a>.</p>
-            </form>
+            <SignupForm />
             <a className="close-absolute mr-md-5 mr-xl-6 pt-5" href="index.html">
               <svg className="svg-icon w-3rem h-3rem">
                 <use xlinkHref="#close-1"></use>

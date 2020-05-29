@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignupForm from "./components/SignupForm";
 
@@ -16,20 +16,18 @@ const Signup = props => {
             <div className="mb-4"><img className="img-fluid mb-4" src="/img/logo-square.svg" alt="..."
                                        style={{maxWidth: '4rem'}} />
               <h2>Sign up</h2>
-              <p className="text-muted">His room, a proper human room although a little too small, lay peacefully
-                between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
             </div>
             <SignupForm />
-            <a className="close-absolute mr-md-5 mr-xl-6 pt-5" href="index.html">
+            <Link className="close-absolute mr-md-5 mr-xl-6 pt-5" to="/">
               <svg className="svg-icon w-3rem h-3rem">
-                <use xlinkHref="#close-1"></use>
+                <use xlinkHref="#close-1"/>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
           <div className="bg-cover h-100 mr-n3"
-               style={{backgroundImage: 'url(/img/photo/photo-1497436072909-60f360e1d4b1.jpg)'}}></div>
+               style={{backgroundImage: 'url(/img/photo/photo-1497436072909-60f360e1d4b1.jpg)'}}/>
         </div>
       </div>
     </div>

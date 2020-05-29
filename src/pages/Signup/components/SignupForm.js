@@ -68,10 +68,6 @@ const SignupForm = ({ firebase, history }) => {
         const firstName = displayName.split(' ')[0];
         const lastName = displayName.split(' ')[1] || '';
 
-        console.log(email);
-        console.log(firstName);
-        console.log(lastName);
-
         user.getIdToken()
           .then(token => {
             axios.post('/api/users/create', {
@@ -89,7 +85,6 @@ const SignupForm = ({ firebase, history }) => {
           })
       })
       .catch(err => {
-        console.log("had err")
         switch (err.code) {
           case 'auth/account-exists-with-different-credential':
             setAlert("The email for that account is already in use.");
@@ -194,7 +189,6 @@ const SignupForm = ({ firebase, history }) => {
         </button>
         <hr className="my-4" />
         <div role="alert" className="alert alert-danger mt-3 animate bounceIn" hidden={!alert}>{alert}</div>
-        <hr className="my-4" />
         <p className="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and
         Conditions</a> and <a href="#">Privacy Policy</a>.</p>
         </Form>

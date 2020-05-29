@@ -22,7 +22,7 @@ const SignupForm = ({ firebase, history }) => {
         user.getIdToken()
           .then(token => {
             axios.post('/api/users/create', {
-              firstName, lastName, email, password
+              firstName, lastName, email
             }, {
               headers: {
                 Authorization: token
@@ -55,6 +55,56 @@ const SignupForm = ({ firebase, history }) => {
 
         return actions.setSubmitting(false);
       });
+  };
+
+  const signUpProvider = provider => {
+    setAlert(null);
+
+    firebase.auth().signInWithPopup(provider)
+      .then(result => {
+        const { user } = result;
+        const { email, displayName } = user;
+
+        const firstName = displayName.split(' ')[0];
+        const lastName = displayName.split(' ')[1] || '';
+
+        console.log(email);
+        console.log(firstName);
+        console.log(lastName);
+
+        user.getIdToken()
+          .then(token => {
+            axios.post('/api/users/create', {
+              firstName, lastName, email
+            }, {
+              headers: {
+                Authorization: token
+              }
+            })
+              .then(() => {
+                firebase.auth().currentUser.sendEmailVerification();
+
+                return history.push('/');
+              })
+          })
+      })
+      .catch(err => {
+        console.log("had err")
+        switch (err.code) {
+          case 'auth/account-exists-with-different-credential':
+            setAlert("The email for that account is already in use.");
+            break;
+
+          case 'auth/cancelled-popup-request':
+            break;
+
+          case 'auth/popup-closed-by-user':
+            break;
+
+          default:
+            setAlert("Something went wrong. Please try again.")
+        }
+      })
   };
 
   return (
@@ -132,11 +182,15 @@ const SignupForm = ({ firebase, history }) => {
         </div>
         <button className="btn btn-lg btn-block btn-primary" type="submit" disabled={isSubmitting}>Sign up</button>
         <hr className="my-3 hr-text letter-spacing-2" data-content="OR" />
-        <button className="btn btn btn-outline-primary btn-block btn-social mb-3">
-          <i className="fa-2x fa-facebook-f fab btn-social-icon" />Connect <span className="d-none d-sm-inline">with Facebook</span>
-        </button>
-        <button className="btn btn btn-outline-muted btn-block btn-social mb-3">
+        <button type="button" className="btn btn btn-outline-muted btn-block btn-social mb-3" onClick={() => {
+          signUpProvider(new firebase.auth.GoogleAuthProvider());
+        }}>
           <i className="fa-2x fa-google fab btn-social-icon" />Connect <span className="d-none d-sm-inline">with Google</span>
+        </button>
+        <button type="button" className="btn btn btn-outline-primary btn-block btn-social mb-3" onClick={() => {
+          signUpProvider(new firebase.auth.FacebookAuthProvider());
+        }}>
+          <i className="fa-2x fa-facebook-f fab btn-social-icon" />Connect <span className="d-none d-sm-inline">with Facebook</span>
         </button>
         <hr className="my-4" />
         <div role="alert" className="alert alert-danger mt-3 animate bounceIn" hidden={!alert}>{alert}</div>

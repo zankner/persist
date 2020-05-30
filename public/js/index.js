@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import './icons';
+import '../../scss/style.scss';
 import Home from '../../src/pages/Home/Home';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';

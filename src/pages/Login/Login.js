@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginForm from "./components/LoginForm";
 
@@ -18,11 +18,11 @@ const Login = props => {
               <h2>Welcome back</h2>
             </div>
             <LoginForm />
-            <a className="close-absolute mr-md-5 mr-xl-6 pt-5" href="index.html">
+            <Link className="close-absolute mr-md-5 mr-xl-6 pt-5" to="/">
               <svg className="svg-icon w-3rem h-3rem">
                 <use xlinkHref="#close-1"/>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">

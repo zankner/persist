@@ -159,7 +159,6 @@ const LoginForm = ({ firebase, history }) => {
                 className="text-sm">Remember me for 30 days</span></label>
             </div>
           </div>
-          <button className="btn btn-lg btn-block btn-primary" type="submit" disabled={isSubmitting}>Login</button>
           <hr className="my-3 hr-text letter-spacing-2" data-content="OR" />
           <button type="button" className="btn btn btn-outline-muted btn-block btn-social mb-3" onClick={() => {
             signInProvider(new firebase.auth.GoogleAuthProvider());

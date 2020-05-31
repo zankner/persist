@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Formik, Field, Form, getIn, ErrorMessage } from 'formik';
 
 
-const LoginForm = ({ firebase, history }) => {
+const LoginForm = ({ firebase, history, auth }) => {
 
   const [alert, setAlert] = useState(null);
 
@@ -71,7 +71,7 @@ const LoginForm = ({ firebase, history }) => {
     firebase.auth().signInWithPopup(provider)
       .then(result => {
         const { user } = result;
-
+        console.log(auth.isLoaded);
         user.getIdToken()
           .then(token => {
             axios.get(`/api/users/${user.uid}/get`, {
@@ -177,7 +177,12 @@ const LoginForm = ({ firebase, history }) => {
   );
 };
 
+const mapStateToProps = state => ({
+  auth: state.firebase.auth
+});
+
 export default compose(
+  connect(mapStateToProps),
   withFirebase,
   withRouter
 )(LoginForm);

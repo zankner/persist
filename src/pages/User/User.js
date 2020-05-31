@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
+import NotFound from "../../components/NotFound";
 import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 
-const User = props => {
+const User = ({ firebase, auth, match, profile }) => {
+
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if (!auth.isLoaded) return;
+        firebase.auth().currentUser.getIdToken()
+          .then(token =>{
+              axios.get(`/api/users/${match.params.user}/get`, {
+                  headers: {Authorization: token}
+              })
+                .catch(() => setError(true));
+          })
+          .catch(() => {
+              setError(true);
+          })
+    }, [auth]);
+
+    if (error) return <NotFound />;
 
     return (
         <Layout >

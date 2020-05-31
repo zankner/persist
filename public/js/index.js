@@ -18,6 +18,7 @@ import '@firebase/storage';
 import Search from '../../src/pages/Search/Search';
 import Login from '../../src/pages/Login/Login';
 import Signup from '../../src/pages/Signup/Signup';
+import NotFound from '../../src/components/NotFound';
 import Product from '../../src/pages/Products/Shopper/Product/Product';
 import Summary from '../../src/pages/Checkout/Summary/Summary';
 import Payment from '../../src/pages/Checkout/Payment/Payment';
@@ -138,6 +139,7 @@ render(
 					<Route exact path='/users/:user/orders' component={UserOrders} />
 					<Route exact path='/users/:user/orders/:order' component={UserOrder} />
 					<Route exact path='/cart' component={Cart} />
+					<Route exact path="/not-found" component={NotFound} />
 				</Switch>
 			</BrowserRouter>
 		</ReactReduxFirebaseProvider>

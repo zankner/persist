@@ -50,7 +50,7 @@ const Navbar = ({ auth }) => {
                 <img className="avatar avatar-md avatar-border-white mr-2" src="/img/avatar/avatar-10.jpg" alt="Jack London" />
               </a>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenuLink">
-                <Link className="dropdown-item" to="user-booking-1.html">Booking process - 4 pages </Link>
+                <Link className="dropdown-item" to={`users/${auth.uid}`}>Booking process - 4 pages </Link>
                 <Link className="dropdown-item" to="user-grid.html">Bookings &mdash; grid view </Link>
                 <Link className="dropdown-item" to="user-booking-detail.html">Booking detail </Link>
                 <div className="dropdown-divider"/>

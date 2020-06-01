@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from "axios";
 import { Formik, Field, Form, getIn, ErrorMessage } from 'formik';
+import PhoneInput from "react-phone-number-input/input";
 
 
 const PersonalInfo = ({ auth, profile, firebase }) => {
@@ -52,7 +53,7 @@ const PersonalInfo = ({ auth, profile, firebase }) => {
       }}
       onSubmit={handleSubmit}
     >
-      {({errors, isSubmitting, touched}) => (
+      {({errors, isSubmitting, touched, values, setFieldValue}) => (
         <Form className="form-validate" autoComplete="off">
           <div className="row pt-4">
             <div className="form-group col-md-6">
@@ -90,9 +91,12 @@ const PersonalInfo = ({ auth, profile, firebase }) => {
             </div>
             <div className="form-group col-md-6">
               <label className="form-label" htmlFor="name">Phone Number</label>
-              <Field
+              <PhoneInput
+                country="US"
                 name="number"
-                placeholder="123456789"
+                placeholder="(123) 456-7890"
+                value={values.number}
+                onChange={(value) => setFieldValue('number', value || '')}
                 className={getIn(errors, "number") && getIn(touched, "number")
                   ? 'form-control is-invalid'
                   : 'form-control'

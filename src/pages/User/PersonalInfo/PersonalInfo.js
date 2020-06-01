@@ -55,10 +55,12 @@ const PersonalInfo = ({auth, profile, firebase, match}) => {
                       </button>
                     </div>
                   </div>
-                  <p className="text-sm text-muted"><i className="fa fa-id-card fa-fw mr-2"/>John
-                    Doe<br/><i className="fa fa-birthday-cake fa-fw mr-2"/>06/22/1980<br/><i
-                      className="fa fa-envelope-open fa-fw mr-2"/>john.doe@directory.com <span
-                      className="mx-2"> | </span> <i className="fa fa-phone fa-fw mr-2"/>+42055544466
+                  <p className="text-sm text-muted">
+                    <i className="fa fa-id-card fa-fw mr-2"/>{`${profile.firstName} ${profile.lastName}`}<br/>
+                    <i className="fa fa-birthday-cake fa-fw mr-2"/>{profile.birthdate}<br/>
+                    <i
+                      className="fa fa-envelope-open fa-fw mr-2"/>{profile.email}<span
+                      className="mx-2"> | </span> <i className="fa fa-phone fa-fw mr-2"/>{profile.number}
                   </p>
                   <div className="collapse" id="personalDetails">
                     <PersonalDetailsForm profile={profile} />

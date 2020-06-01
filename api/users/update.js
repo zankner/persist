@@ -9,17 +9,12 @@ module.exports = async (req, res) => {
     businesses, orders, schedule, receipts, address} = req.body;
 
   try {
-    check.assert.nonEmptyString(email);
-    check.assert.nonEmptyString(firstName);
-    check.assert.nonEmptyString(lastName);
-    check.assert.string(number);
-    check.assert.string(birthdate);
-    check.assert.string(address);
-    check.assert.object(billing);
-    check.assert.array(businesses);
-    check.assert.array(orders);
-    check.assert.array(schedule);
-    check.assert.array(receipts)
+    check.assert.maybe.nonEmptyString(email);
+    check.assert.maybe.nonEmptyString(firstName);
+    check.assert.maybe.nonEmptyString(lastName);
+    check.assert.maybe.string(number);
+    check.assert.maybe.string(birthdate);
+    check.assert.maybe.string(address);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -38,12 +33,7 @@ module.exports = async (req, res) => {
       lastName,
       birthdate,
       number,
-      billing,
-      address,
-      businesses,
-      orders,
-      schedule,
-      receipts
+      address
     };
 
     await userRef.update(user);

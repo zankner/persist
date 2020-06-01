@@ -8,10 +8,10 @@ import { Formik, Field, Form, getIn, ErrorMessage } from 'formik';
 
 
 const PersonalInfo = ({ auth, profile, firebase }) => {
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState({content: '', success: false, hidden: true});
 
   const handleSubmit = (values, actions) => {
-    const { firstName, lastName, birthdate, number } = values;
+    const { firstName, lastName, birthdate, number, email, address } = values;
 
     firebase.auth().currentUser.getIdToken()
       .then(token => {
@@ -19,21 +19,23 @@ const PersonalInfo = ({ auth, profile, firebase }) => {
           firstName,
           lastName,
           birthdate,
-          number
+          number,
+          email,
+          address
         }, {
           headers: {Authorization: token}
         })
           .then(() => {
-            setAlert("Your profile was successfully updated!");
+            setAlert({content:"Your profile was successfully updated!", success: true, hidden: false});
             actions.setSubmitting(false);
           })
           .catch(() => {
-            setAlert("There was an error updating your profile.");
+            setAlert({content:"There was an error updating your profile.", success: false, hidden: false});
             actions.setSubmitting(false);
           })
       })
       .catch(() => {
-        setAlert("There was an error updating your profile.");
+        setAlert({content:"There was an error updating your profile.", success: false, hidden: false});
         actions.setSubmitting(false);
       });
   };
@@ -44,7 +46,9 @@ const PersonalInfo = ({ auth, profile, firebase }) => {
         firstName: profile.firstName,
         lastName: profile.lastName,
         birthdate: profile.birthdate,
-        number: profile.number
+        number: profile.number,
+        email: profile.email,
+        address: profile.address
       }}
       onSubmit={handleSubmit}
     >
@@ -95,11 +99,34 @@ const PersonalInfo = ({ auth, profile, firebase }) => {
                 }
               />
             </div>
+            <div className="form-group col-md-6">
+              <label className="form-label" htmlFor="name">Email</label>
+              <Field
+                name="email"
+                placeholder="example@address.com"
+                className={getIn(errors, "email") && getIn(touched, "email")
+                  ? 'form-control is-invalid'
+                  : 'form-control'
+                }
+              />
+            </div>
+            <div className="form-group col-md-6">
+              <label className="form-label" htmlFor="name">Address</label>
+              <Field
+                name="address"
+                placeholder="10 Green Street"
+                className={getIn(errors, "address") && getIn(touched, "address")
+                  ? 'form-control is-invalid'
+                  : 'form-control'
+                }
+              />
+            </div>
           </div>
-          <button className="btn btn-outline-primary mb-4" type="submit" disabled={isSubmitting}> Save your
-            personal details
+          <button type="submit" className="btn btn-lg btn-block btn-primary" disabled={isSubmitting}>
+            Update profile
           </button>
-          <div role="alert" className="alert alert-danger mt-3 animate bounceIn" hidden={!alert}>{alert}</div>
+          <div role="alert" className={`alert ${alert.success ? 'alert-success' : 'alert-danger'} mt-3 animate bounceIn`}
+               hidden={alert.hidden}>{alert.content}</div>
         </Form>
       )}
     </ Formik>

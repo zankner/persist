@@ -50,7 +50,7 @@ const User = ({firebase, auth, match, profile}) => {
                     </div>
                     <h5 className="card-title mb-3"><Link
                       className="text-decoration-none text-dark stretched-link"
-                      to={`users/${match.params.user}/personal-info`}>Personal info</Link></h5>
+                      to={`/users/${match.params.user}/personal-info`}>Personal info</Link></h5>
                     <p className="text-muted card-text text-sm">Provide personal details and how we
                       can reach you</p>
                   </div>

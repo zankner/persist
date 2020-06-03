@@ -1,9 +1,9 @@
 import React from 'react';
-import { Field, FieldArray, getIn, useFormikContext } from 'formik';
+import {Field, FieldArray, getIn, useFormikContext} from 'formik';
 
 const Background = () => {
 
-  const { errors, touched } = useFormikContext();
+  const {errors, touched, values} = useFormikContext();
 
   const days = ['Sunday', 'Monday', 'Tuesday',
     'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -43,40 +43,42 @@ const Background = () => {
               }
             />
             <small className="form-text text-muted mt-2" id="descriptionHelp">The bedding was
-            hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin
-            compared with the size of the rest of him, waved about helplessly as he looked. &quot;What's
-            happened to me?&quot; he thought. It wasn't a dream. </small>
+              hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin
+              compared with the size of the rest of him, waved about helplessly as he looked. &quot;What's
+              happened to me?&quot; he thought. It wasn't a dream. </small>
           </div>
           <div className="form-group">
-            <label className="form-label">Is your property set as a dedicated guest
-              space?</label>
+            <label className="form-label">Days of business</label>
             <FieldArray
               name="daysOpen"
               render={arrayHelpers => (
                 <div>
-                  {days.map((day, index) => (
-                    <div key={index}>
+                  {days.map((day) => (
+                    <div key={day}>
                       <div className="custom-control custom-checkbox">
-                        <Field className="custom-control-input" type="checkbox" id="amenities_0" name="daysOpen" />
-                        <label className="custom-control-label text-muted" htmlFor="amenities_0">Kitchen </label>
+                        <input
+                          name="daysOpen"
+                          type="checkbox"
+                          className="custom-control-input"
+                          value={day}
+                          id={day}
+                          checked={!!values.daysOpen.includes(day.toLowerCase())}
+                          onChange={e => {
+                            console.log(values.daysOpen);
+                            if (e.target.checked) arrayHelpers.push(day.toLowerCase());
+                            else {
+                              const idx = values.daysOpen.indexOf(day.toLowerCase());
+                              arrayHelpers.remove(idx);
+                            }
+                          }}
+                        />
+                        <label className="custom-control-label text-muted" htmlFor={day}>{day}</label>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
             />
-          </div>
-          <div className="form-group">
-            <label className="form-label">Is your property set as a dedicated guest
-              space?</label>
-            <div className="custom-control custom-checkbox">
-              <input className="custom-control-input" type="checkbox" name="daysOpen" />
-              <label className="custom-control-label">test</label>
-            </div>
-            <div className="custom-control custom-checkbox">
-              <input className="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]" />
-                <label className="custom-control-label text-muted" htmlFor="amenities_0">Kitchen </label>
-            </div>
           </div>
         </div>
       </div>

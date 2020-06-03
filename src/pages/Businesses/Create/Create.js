@@ -56,7 +56,7 @@ const Create = ({auth, profile, firebase}) => {
               name: "",
               address: "",
               description: "",
-              daysOpen: [],
+              daysOpen: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
               photos: []
             }}
             onSubmit={handleSubmit}
@@ -72,6 +72,7 @@ const Create = ({auth, profile, firebase}) => {
                 <div className="row form-block flex-column flex-sm-row">
                   <div className="col text-center text-sm-left">
                     <button className={`btn btn-link text-muted ${(slideIndex === 1 || slideIndex === 5) ? '' : 'd-none'}`}
+                            type="button"
                             onClick={() => setSlideIndex(slideIndex - 1)}>
                       <i className="fa-chevron-left fa mr-2"/>Back
                     </button>

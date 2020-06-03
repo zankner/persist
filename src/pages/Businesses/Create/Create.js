@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import {Formik, Field, Form, getIn, ErrorMessage} from 'formik';
 import Introduction from "./components/Introduction/Introduction";
 import Background from "./components/Background/Background";
-import Description from "./components/Description/Description";
+import Billing from './components/Billing/Billing';
 import Specifics from "./components/Specifics/Specifics";
 import Photos from "./components/Photos/Photos";
 import Completion from "./components/Completion/Completion";
@@ -65,7 +65,7 @@ const Create = ({auth, profile, firebase}) => {
               <Form className="form-validate" autoComplete="off">
                 {slideIndex === 0 && <Introduction setSlideIndex={setSlideIndex}/>}
                 {slideIndex === 1 && <Background />}
-                {slideIndex === 2 && <Description />}
+                {slideIndex === 2 && <Billing />}
                 {slideIndex === 3 && <Specifics />}
                 {slideIndex === 4 && <Photos />}
                 {slideIndex === 5 && <Completion />}

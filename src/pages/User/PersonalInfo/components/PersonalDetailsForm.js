@@ -46,6 +46,7 @@ const PersonalInfo = ({ auth, profile, firebase }) => {
       initialValues={{
         firstName: profile.firstName,
         lastName: profile.lastName,
+        daysOpen: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
         birthdate: profile.birthdate,
         number: profile.number,
         email: profile.email,

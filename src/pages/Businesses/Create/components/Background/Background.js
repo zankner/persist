@@ -5,8 +5,8 @@ const Background = () => {
 
   const { errors, touched } = useFormikContext();
 
-  const days = ['sunday', 'monday', 'tuesday',
-    'wednesday', 'thursday', 'friday', 'saturday'];
+  const days = ['Sunday', 'Monday', 'Tuesday',
+    'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   return (
     <>
@@ -56,10 +56,9 @@ const Background = () => {
                 <div>
                   {days.map((day, index) => (
                     <div key={index}>
-                      <div className="custom-control custom-radio">
-                        <input className="custom-control-input" type="radio" id="guests_0"
-                               name="guests"/>
-                        <label className="custom-control-label" htmlFor="guests_0">{day}</label>
+                      <div className="custom-control custom-checkbox">
+                        <Field className="custom-control-input" type="checkbox" id="amenities_0" name="daysOpen" />
+                        <label className="custom-control-label text-muted" htmlFor="amenities_0">Kitchen </label>
                       </div>
                     </div>
                   ))}
@@ -70,19 +69,13 @@ const Background = () => {
           <div className="form-group">
             <label className="form-label">Is your property set as a dedicated guest
               space?</label>
-            <div className="custom-control custom-radio">
-              <input className="custom-control-input" type="radio" id="guests_0"
-                     name="guests"/>
-              <label className="custom-control-label" htmlFor="guests_0">Yes, it's
-                primarily set up for
-                guests</label>
+            <div className="custom-control custom-checkbox">
+              <input className="custom-control-input" type="checkbox" name="daysOpen" />
+              <label className="custom-control-label">test</label>
             </div>
-            <div className="custom-control custom-radio">
-              <input className="custom-control-input" type="radio" id="guests_1"
-                     name="guests"/>
-              <label className="custom-control-label" htmlFor="guests_1">No, I keep my
-                personal belongings
-                there</label>
+            <div className="custom-control custom-checkbox">
+              <input className="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]" />
+                <label className="custom-control-label text-muted" htmlFor="amenities_0">Kitchen </label>
             </div>
           </div>
         </div>

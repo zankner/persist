@@ -65,7 +65,7 @@ const Create = ({auth, profile, firebase}) => {
               <Form className="form-validate" autoComplete="off">
                 {slideIndex === 0 && <Introduction setSlideIndex={setSlideIndex}/>}
                 {slideIndex === 1 && <Background />}
-                {slideIndex === 2 && <Billing />}
+                {slideIndex === 2 && <Photos />}
                 {slideIndex === 3 && <Specifics />}
                 {slideIndex === 4 && <Photos />}
                 {slideIndex === 5 && <Completion />}

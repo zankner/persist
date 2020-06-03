@@ -12,9 +12,9 @@ const Billing = () => {
           to meet the challenge of our current situation.</p>
         <p className="text-muted mb-5">Persist provides commerce that is convenient for both you and your customers.</p>
         <p className="mb-5 mb-lg-0">
-          <a className="stripe-connect" onClick={()=>{props.setSlideIndex(1)}}>
-            <span>Connect with Stripe</span>
-          </a>
+            <button className="btn"  onClick={()=>{props.setSlideIndex(1)}}>
+                <img src="/img/brand/stripe/blue-on-light.png"  alt="Connect with Stripe"/>
+            </button>
         </p>
       </div>
       <div className="col-lg-5 ml-auto d-flex align-items-center"><img className="img-fluid"

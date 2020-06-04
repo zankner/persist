@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import Layout from '../../../../../components/Layout';
-import { compose } from 'redux';
-import { withFirebase } from 'react-redux-firebase';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useFormikContext } from "formik";
+import Dropzone from "react-dropzone";
+import {withFirebase} from "react-redux-firebase";
+import {compose} from "redux";
 
+const Photos = ({ firebase, auth }) => {
 
-const Photos = props => {
+  const [uploading, setUploading] = useState(false);
+  const { values, setFieldValue } = useFormikContext();
 
   return (
-    <section className="py-5">
+    <>
       <div className="container">
         <p className="subtitle text-primary">Add new listing</p>
         <h1 className="h2 mb-5"> Photos <span className="text-muted float-right">Step 4</span></h1>
@@ -22,44 +23,54 @@ const Photos = props => {
           </div>
           <div className="col-lg-7 ml-auto">
             <div className="form-group">
-              <form className="dropzone" id="demo-upload" action="/upload">
-                <div className="dz-message text-muted">
-                  <p>Drop files here or click to upload.</p>
-                  <p><span className="note">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                  </p>
-                </div>
-              </form>
-            </div>
-            <div className="d-none" id="dropzoneTemplate">
-              <div className="dz-preview dz-file-preview">
-                <div className="dz-image"><img data-dz-thumbnail="" alt="" src="/img/logo-square.svg" /></div>
-                <div className="dz-details">
-                  <div className="dz-filename"><span data-dz-name=""></span></div>
-                  <div className="dz-size" data-dz-size=""></div>
-                </div>
-                <div className="dz-progress"><span className="dz-upload" data-dz-uploadprogress=""></span></div>
-                <div className="dz-success-mark"><span className="dz-icon"><i className="fa-check fa"></i></span>
-                </div>
-                <div className="dz-error-mark"><span className="dz-icon"><i className="fa-times fa"></i></span>
-                </div>
-                <div className="dz-error-message"><span data-dz-errormessage=""></span></div>
-              </div>
+              <Dropzone
+                accept={['image/jpeg', 'image/png', 'image/gif']}
+                onDrop={(acceptedFiles) => {
+                  setUploading(true);
+                  firebase.uploadFiles(`${auth.uid}`, acceptedFiles).then((files) => {
+                    Promise.all(
+                      files.map((file) => (
+                        file.uploadTaskSnapshot.ref.getDownloadURL()
+                          .then((downloadURL) => {
+                            setFieldValue('photos', values.photos.concat(downloadURL));
+                          }).then(() => setUploading(false))
+                      ))
+                    ).then(() => setUploading(false));
+                  });
+                }}
+              >
+                {({ getRootProps, getInputProps }) => (
+                  <div className="container">
+                    <div {...getRootProps()} className="dropzone">
+                      <input {...getInputProps()} />
+                      <div className="dz-message">
+                        {(() => {
+                          if (uploading) return <p className="text-muted">Uploading...</p>;
+
+                          switch (values.photos.length) {
+                            case 0:
+                              return <p className="text-muted">Click here to select and upload 1-6 photos of your listing.</p>;
+                            case 1:
+                              return <p className="text-muted">1 file uploaded</p>;
+                            default:
+                              return (
+                                <p className="text-muted">
+                                  {`${values.photos.length} files uploaded`}
+                                </p>
+                              );
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </Dropzone>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </>
   )
 };
 
-
-const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  profile: state.firebase.profile
-});
-
-export default compose(
-  connect(mapStateToProps),
-  withFirebase,
-  withRouter
-)(Photos);
+export default compose(withFirebase)(Photos);

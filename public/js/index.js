@@ -25,7 +25,6 @@ import Payment from '../../src/pages/Checkout/Payment/Payment';
 import Completion from '../../src/pages/Checkout/Completion/Completion';
 import CreateBusiness from '../../src/pages/Businesses/Create/Create';
 import BusinessBackground from '../../src/pages/Businesses/Create/components/Background/Background';
-import BusinessDescription from '../../src/pages/Businesses/Create/components/Description/Description';
 import BusinessSpecifics from '../../src/pages/Businesses/Create/components/Specifics/Specifics';
 import BusinessPhotos from '../../src/pages/Businesses/Create/components/Photos/Photos';
 import BusinessCompletion from '../../src/pages/Businesses/Create/components/Completion/Completion';
@@ -106,7 +105,6 @@ render(
 					<Route exact path='/checkout/completion' component={Completion} />
 					<Route exact path='/business/create' component={CreateBusiness} />
 					<Route exact path='/business/create/background' component={BusinessBackground} />
-					<Route exact path='/business/create/description' component={BusinessDescription} />
 					<Route exact path='/business/create/specifics' component={BusinessSpecifics} />
 					<Route exact path='/business/create/photos' component={BusinessPhotos} />
 					<Route exact path='/business/create/completion' component={BusinessCompletion} />

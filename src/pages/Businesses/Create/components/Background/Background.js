@@ -47,39 +47,6 @@ const Background = () => {
               compared with the size of the rest of him, waved about helplessly as he looked. &quot;What's
               happened to me?&quot; he thought. It wasn't a dream. </small>
           </div>
-          <div className="form-group">
-            <label className="form-label">Days of business</label>
-            <FieldArray
-              name="daysOpen"
-              render={arrayHelpers => (
-                <div>
-                  {days.map((day) => (
-                    <div key={day}>
-                      <div className="custom-control custom-checkbox">
-                        <input
-                          name="daysOpen"
-                          type="checkbox"
-                          className="custom-control-input"
-                          value={day}
-                          id={day}
-                          checked={!!values.daysOpen.includes(day.toLowerCase())}
-                          onChange={e => {
-                            console.log(values.daysOpen);
-                            if (e.target.checked) arrayHelpers.push(day.toLowerCase());
-                            else {
-                              const idx = values.daysOpen.indexOf(day.toLowerCase());
-                              arrayHelpers.remove(idx);
-                            }
-                          }}
-                        />
-                        <label className="custom-control-label text-muted" htmlFor={day}>{day}</label>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            />
-          </div>
         </div>
       </div>
       <div className="row form-block">

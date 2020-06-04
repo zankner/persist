@@ -7,12 +7,11 @@ import {connect} from 'react-redux';
 import {Formik, Field, Form, getIn, ErrorMessage} from 'formik';
 import Introduction from "./components/Introduction/Introduction";
 import Background from "./components/Background/Background";
-import Billing from './components/Billing/Billing';
-import Specifics from "./components/Specifics/Specifics";
 import Photos from "./components/Photos/Photos";
 import Completion from "./components/Completion/Completion";
 import axios from "axios";
 import NotFound from "../../../components/NotFound";
+import Specifics from "./components/Specifics/Specifics";
 
 
 const Create = ({auth, profile, firebase}) => {
@@ -21,7 +20,9 @@ const Create = ({auth, profile, firebase}) => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const handleSubmit = (values, actions) => {
+    console.log(slideIndex);
     setSlideIndex(slideIndex + 1)
+    console.log(slideIndex);
   };
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const Create = ({auth, profile, firebase}) => {
       <div className="pt-nav">
         <div className="progress rounded-0 sticky-top" style={{height: '8px', top: '78px'}}>
           <div className="progress-bar" role="progressbar" style={{
-            width: `${20 * slideIndex}%`, ariaValuenow: `${20 * slideIndex}`, ariaValuemin: "0",
+            width: `${25 * slideIndex}%`, ariaValuenow: `${25 * slideIndex}`, ariaValuemin: "0",
             ariaValuemax: "100"
           }}/>
         </div>
@@ -56,30 +57,30 @@ const Create = ({auth, profile, firebase}) => {
               name: "",
               address: "",
               description: "",
+              tax: null,
               daysOpen: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
               photos: []
             }}
             onSubmit={handleSubmit}
           >
-            {({errors, isSubmitting, touched}) => (
+            {({errors, isSubmitting, touched, setFieldValue}) => (
               <Form className="form-validate" autoComplete="off">
                 {slideIndex === 0 && <Introduction setSlideIndex={setSlideIndex}/>}
                 {slideIndex === 1 && <Background />}
-                {slideIndex === 2 && <Photos />}
-                {slideIndex === 3 && <Specifics />}
-                {slideIndex === 4 && <Photos />}
-                {slideIndex === 5 && <Completion />}
+                {slideIndex === 2 && <Specifics />}
+                {slideIndex === 3 && <Photos auth={auth}/>}
+                {slideIndex === 4 && <Completion />}
                 <div className="row form-block flex-column flex-sm-row">
                   <div className="col text-center text-sm-left">
-                    <button className={`btn btn-link text-muted ${(slideIndex === 1 || slideIndex === 5) ? '' : 'd-none'}`}
+                    <button className={`btn btn-link text-muted ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}
                             type="button"
                             onClick={() => setSlideIndex(slideIndex - 1)}>
                       <i className="fa-chevron-left fa mr-2"/>Back
                     </button>
                   </div>
                   <div className="col text-center text-sm-right">
-                    <button className={`btn btn-primary px-3 ${(slideIndex === 1 || slideIndex === 5) ? '' : 'd-none'}`}
-                            type="submit"> {slideIndex === 4 ? 'Finish' : 'Next step'}
+                    <button className={`btn btn-primary px-3 ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}
+                            type="submit"> {slideIndex === 3 ? 'Finish' : 'Next step'}
                       <i className="fa-chevron-right fa ml-2"/></button></div>
                 </div>
               </Form>

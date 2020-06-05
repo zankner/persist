@@ -4,13 +4,14 @@ const status = require('http-status');
 const check = require('check-types');
 
 module.exports = async (req, res) => {
-  const {email, name, address, number} = req.body;
+  const { name, description, tax, daysOpen, photos } = req.body;
 
   try {
-    check.assert.nonEmptyString(email);
     check.assert.nonEmptyString(name);
-    check.assert.nonEmptyString(address);
-    check.assert.nonEmptyString(number);
+    check.assert.nonEmptyString(description);
+    check.assert.number(tax);
+    check.assert.array.of.nonEmptyString(daysOpen);
+    check.assert.array.of.nonEmptyString(photos);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -23,11 +24,15 @@ module.exports = async (req, res) => {
     const userDoc = await userRef.get();
     if (!userDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
 
+
     const business = {
-      email,
       name,
-      address,
-      number,
+      description,
+      tax,
+      daysOpen,
+      photos,
+      address: '',
+      number: '',
       admins: [uid],
       emailList: '',
       schedule: [],

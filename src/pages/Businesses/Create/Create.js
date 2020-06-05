@@ -20,9 +20,29 @@ const Create = ({auth, profile, firebase}) => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const handleSubmit = (values, actions) => {
-    console.log(slideIndex);
-    setSlideIndex(slideIndex + 1)
-    console.log(slideIndex);
+    if (slideIndex === 3) {
+      const { name, description, tax, daysOpen, photos } = values;
+
+      firebase.auth().currentUser.getIdToken()
+        .then(token => {
+          axios.post('/api/businesses/create', {
+            name, description, tax, daysOpen, photos
+          }, {
+            headers: {Authorization: token}
+          })
+            .then(() => {
+              setSlideIndex(slideIndex + 1);
+            })
+            .catch(() => {
+              setSlideIndex(slideIndex + 1);
+            })
+        })
+        .catch(() => {
+          setSlideIndex(slideIndex + 1);
+        })
+    } else {
+      setSlideIndex(slideIndex + 1)
+    }
   };
 
   useEffect(() => {

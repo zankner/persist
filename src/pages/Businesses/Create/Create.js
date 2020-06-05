@@ -80,7 +80,7 @@ const Create = ({auth, profile, firebase}) => {
                   </div>
                   <div className="col text-center text-sm-right">
                     <button className={`btn btn-primary px-3 ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}
-                            type="submit"> {slideIndex === 3 ? 'Finish' : 'Next step'}
+                            type="submit"> {slideIndex === 3 ? 'Add Business' : 'Next step'}
                       <i className="fa-chevron-right fa ml-2"/></button></div>
                 </div>
               </Form>

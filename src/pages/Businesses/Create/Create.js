@@ -18,6 +18,7 @@ const Create = ({auth, profile, firebase}) => {
 
   const [error, setError] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [creationStatus, setCreationStatus] = useState(null);
 
   const handleSubmit = (values, actions) => {
     if (slideIndex === 3) {
@@ -32,16 +33,23 @@ const Create = ({auth, profile, firebase}) => {
           })
             .then(() => {
               setSlideIndex(slideIndex + 1);
+              setCreationStatus(true);
+              actions.setSubmitting(false);
             })
             .catch(() => {
               setSlideIndex(slideIndex + 1);
+              setCreationStatus(false);
+              actions.setSubmitting(false);
             })
         })
         .catch(() => {
           setSlideIndex(slideIndex + 1);
-        })
+          setCreationStatus(false);
+          actions.setSubmitting(false);
+        });
     } else {
       setSlideIndex(slideIndex + 1)
+      actions.setSubmitting(false);
     }
   };
 
@@ -89,7 +97,7 @@ const Create = ({auth, profile, firebase}) => {
                 {slideIndex === 1 && <Background />}
                 {slideIndex === 2 && <Specifics />}
                 {slideIndex === 3 && <Photos auth={auth}/>}
-                {slideIndex === 4 && <Completion />}
+                {slideIndex === 4 && <Completion creationStatus={creationStatus} profile={profile}/>}
                 <div className="row form-block flex-column flex-sm-row">
                   <div className="col text-center text-sm-left">
                     <button className={`btn btn-link text-muted ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}

@@ -10,8 +10,10 @@ module.exports = async (req, res) => {
     check.assert.nonEmptyString(name);
     check.assert.nonEmptyString(description);
     check.assert.number(tax);
+    check.assert.greaterOrEqual(tax, 0);
     check.assert.array.of.nonEmptyString(daysOpen);
     check.assert.array.of.nonEmptyString(photos);
+    check.assert.nonEmptyArray(photos);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -24,6 +26,8 @@ module.exports = async (req, res) => {
     const userDoc = await userRef.get();
     if (!userDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
 
+    const id = `${uid}-${Date.now()}`;
+
 
     const business = {
       name,
@@ -31,6 +35,7 @@ module.exports = async (req, res) => {
       tax,
       daysOpen,
       photos,
+      id,
       address: '',
       number: '',
       admins: [uid],
@@ -45,8 +50,7 @@ module.exports = async (req, res) => {
       potentialAdmins: []
     };
 
-    const businessId = `${uid}-${Date.now()}`;
-    const businessRef = admin.firestore().collection('businesses').doc(businessId);
+    const businessRef = admin.firestore().collection('businesses').doc(id);
     const businessDoc = await businessRef.get();
 
     if (!businessDoc.data()) await businessRef.set(business);

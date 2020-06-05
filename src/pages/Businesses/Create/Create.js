@@ -19,6 +19,7 @@ const Create = ({auth, profile, firebase}) => {
   const [error, setError] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
   const [creationStatus, setCreationStatus] = useState(null);
+  const [businessId, setBusinessId] = useState('');
 
   const handleSubmit = (values, actions) => {
     if (slideIndex === 3) {
@@ -31,9 +32,10 @@ const Create = ({auth, profile, firebase}) => {
           }, {
             headers: {Authorization: token}
           })
-            .then(() => {
+            .then(res => {
               setSlideIndex(slideIndex + 1);
               setCreationStatus(true);
+              setBusinessId(res.data.id);
               actions.setSubmitting(false);
             })
             .catch(() => {
@@ -48,7 +50,7 @@ const Create = ({auth, profile, firebase}) => {
           actions.setSubmitting(false);
         });
     } else {
-      setSlideIndex(slideIndex + 1)
+      setSlideIndex(slideIndex + 1);
       actions.setSubmitting(false);
     }
   };
@@ -85,7 +87,7 @@ const Create = ({auth, profile, firebase}) => {
               name: "",
               address: "",
               description: "",
-              tax: null,
+              tax: "",
               daysOpen: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
               photos: []
             }}
@@ -97,7 +99,8 @@ const Create = ({auth, profile, firebase}) => {
                 {slideIndex === 1 && <Background />}
                 {slideIndex === 2 && <Specifics />}
                 {slideIndex === 3 && <Photos auth={auth}/>}
-                {slideIndex === 4 && <Completion creationStatus={creationStatus} profile={profile}/>}
+                {slideIndex === 4 && <Completion
+                  creationStatus={creationStatus} profile={profile} businessId={businessId}/>}
                 <div className="row form-block flex-column flex-sm-row">
                   <div className="col text-center text-sm-left">
                     <button className={`btn btn-link text-muted ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}

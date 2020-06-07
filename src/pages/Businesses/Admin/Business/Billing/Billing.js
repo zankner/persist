@@ -1,12 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../../../../components/Layout';
 import { compose } from 'redux';
 import { withFirebase } from 'react-redux-firebase';
-import { withRouter } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from "axios";
 
 
-const Billing = props => {
+const Billing = ({ firebase, match, auth }) => {
+
+  const [alert, setAlert] = useState(null);
+  const [business, setBusiness] = useState(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!auth.isLoaded) return;
+
+    firebase.auth().currentUser.getIdToken()
+      .then(token => {
+        axios.get(`api/businesses/${match.params.business}/admin/get`, {
+          headers: {Authorization: token}
+        })
+          .then(business => setBusiness(business))
+          .catch(() => setError(true))
+      })
+      .catch(() => setError(true))
+  }, [auth]);
+
+  const connectDashboard = () => {
+    firebase.auth().currentUser.getIdToken()
+      .then(token => {
+        axios.get(`api/businesses/${match.params.business}/admin/dashboard`, {
+          headers: {Authorization: token}
+        })
+          .then(res => {
+            window.location = res.data.dashboardUrl.url;
+          })
+          .catch(() => setAlert("Something went wrong. Please try again."))
+      })
+      .catch(() => setAlert("Something went wrong. Please try again."))
+  };
+
+  const connectBilling = () => {
+    firebase.auth().currentUser.getIdToken()
+      .then(token => {
+        axios.post(`/api/businesses/${match.params.business}/billing/connect`, {}, {
+          headers: {Authorization: token}
+        })
+          .then(res => {
+            window.location = res.data.stripeUrl;
+          })
+          .catch(() => setAlert("Something went wrong. Please try again."));
+      })
+      .catch(() => setAlert("Something went wrong. Please try again."));
+  };
 
   return (
     <Layout >
@@ -16,50 +63,23 @@ const Billing = props => {
             <ol className="breadcrumb pl-0  justify-content-start">
               <li className="breadcrumb-item"><a href="index.html">Home</a></li>
               <li className="breadcrumb-item"><a href="user-account.html">Account</a></li>
-              <li className="breadcrumb-item active">Personal info</li>
+              <li className="breadcrumb-item active">Billing info</li>
             </ol>
-            <h1 className="hero-heading mb-0">Personal info</h1>
-            <p className="text-muted mb-5">Manage your Personal info and settings here.</p>
+            <h1 className="hero-heading mb-0">Billing info</h1>
+            <p className="text-muted mb-5">Manage and view your Billing info and settings here.</p>
             <div className="row">
               <div className="col-lg-7">
                 <div className="text-block">
                   <div className="d-flex justify-content-between align-items-end mb-4">
-                    <h5 className="mb-0">Pay with your card</h5>
-                    <div className="text-muted"><i className="fab fa-cc-amex fa-2x mr-2"> </i><i
-                      className="fab fa-cc-visa fa-2x mr-2"> </i><i className="fab fa-cc-mastercard fa-2x"></i></div>
+                    <h5 className="mb-0">Connect to Stripe</h5>
+                    <div className="text-muted">
+                      <img src="/img/brand/stripe/powered_by_stripe.svg" />
+                    </div>
                   </div>
-                  <select className="selectpicker form-control mb-3" name="payment" id="form_payment"
-                          data-style="btn-selectpicker">
-                    <option value="">Visa •••• 5687</option>
-                    <option value="">Mastercard •••• 4569</option>
-                  </select>
-                  <button className="btn btn-link btn-collapse pl-0 text-muted" type="button" data-toggle="collapse"
-                          data-target="#addNewCard" aria-expanded="false" aria-controls="addNewCard"
-                          data-expanded-text="Close" data-collapsed-text="Add a new card">Add a new card
-                  </button>
-                  <div className="row collapse" id="addNewCard">
-                    <div className="form-group col-md-6">
-                      <label className="form-label" htmlFor="card-name">Name on Card</label>
-                      <input className="form-control" type="text" name="card-name" placeholder="Name on card"
-                             id="card-name" />
-                    </div>
-                    <div className="form-group col-md-6">
-                      <label className="form-label" htmlFor="card-number">Card Number</label>
-                      <input className="form-control" type="text" name="card-number" placeholder="Card number"
-                             id="card-number" />
-                    </div>
-                    <div className="form-group col-md-4">
-                      <label className="form-label" htmlFor="expiry-date">Expiry Date</label>
-                      <input className="form-control" type="text" name="expiry-date" placeholder="MM/YY"
-                             id="expiry-date" />
-                    </div>
-                    <div className="form-group col-md-4">
-                      <label className="form-label" htmlFor="cvv">CVC/CVV</label>
-                      <input className="form-control" type="text" name="cvv" placeholder="123" id="cvv" />
-                    </div>
-                    <div className="form-group col-md-4">
-                      <label className="form-label" htmlFor="zip">ZIP</label>
-                      <input className="form-control" type="text" name="zip" placeholder="123" id="zip" />
+                  <div className="col-md-5">
+                    <div className="row">
+                      <button className="btn btn-primary btn-block mb-2" onClick={connectBilling}>Manage account</button>
+                      <button className="btn btn-outline-muted btn-block mb-2" onClick={connectDashboard}>Create account</button>
                     </div>
                   </div>
                 </div>

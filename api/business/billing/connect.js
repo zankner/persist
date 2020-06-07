@@ -18,6 +18,8 @@ module.exports = async (req, res) => {
       .toString(36)
       .slice(2);
 
+    req.session.state = key;
+
     const accountParams = {
       client_id: process.env.TEST_STRIPE_CLIENT_ID,
       state: JSON.stringify({

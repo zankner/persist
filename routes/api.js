@@ -16,6 +16,7 @@ router.post('/businesses/:business/billing/connect', api.businesses.billing.conn
 router.get('/businesses/billing/create', api.businesses.billing.create);
 router.post('/businesses/:business/admin/update', api.businesses.admin.update);
 router.get('/businesses/:business/admin/get', api.businesses.admin.get);
+router.get('/businesses/:business/admin/dashboard', api.businesses.admin.dashboard);
 
 // Orders
 router.post('/orders/create', api.orders.create);

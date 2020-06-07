@@ -2,7 +2,6 @@
 const admin = require('firebase-admin');
 const status = require('http-status');
 const stripe = require('stripe')(process.env.TEST_STRIPE_SECRET);
-const querystring = require('querystring');
 
 module.exports = async (req, res) => {
   try {
@@ -15,9 +14,8 @@ module.exports = async (req, res) => {
     if (!business) return res.sendStatus(status.UNAUTHORIZED);
     if (!business.admins.includes(uid)) return res.sendStatus(status.UNAUTHORIZED);
 
-    const dashboardLink = await stripe.accounts.createLoginLink(business.billing.stripeAccount);
-
-    res.send({dashboardLink});
+    const dashboardUrl = await stripe.accounts.createLoginLink(business.billing.stripeAccount);
+    res.send({dashboardUrl});
   } catch(err) {
     console.log(err.message);
 

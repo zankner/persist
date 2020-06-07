@@ -14,7 +14,8 @@ module.exports.businesses = {
   },
   admin: {
     update: require('./business/admin/update'),
-    get: require('./business/admin/get')
+    get: require('./business/admin/get'),
+    dashboard: require('./business/admin/dashboard')
   }
 };
 

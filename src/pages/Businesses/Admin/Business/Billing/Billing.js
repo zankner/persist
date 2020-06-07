@@ -30,7 +30,7 @@ const Billing = ({ firebase, match, auth }) => {
   const connectDashboard = () => {
     firebase.auth().currentUser.getIdToken()
       .then(token => {
-        axios.get(`api/businesses/${match.params.business}/admin/dashboard`, {
+        axios.get(`/api/businesses/${match.params.business}/admin/dashboard`, {
           headers: {Authorization: token}
         })
           .then(res => {
@@ -78,8 +78,8 @@ const Billing = ({ firebase, match, auth }) => {
                   </div>
                   <div className="col-md-5">
                     <div className="row">
-                      <button className="btn btn-primary btn-block mb-2" onClick={connectBilling}>Manage account</button>
-                      <button className="btn btn-outline-muted btn-block mb-2" onClick={connectDashboard}>Create account</button>
+                      <button className="btn btn-primary btn-block mb-2" onClick={connectDashboard}>Manage account</button>
+                      <button className="btn btn-outline-muted btn-block mb-2" onClick={connectBilling}>Create account</button>
                     </div>
                   </div>
                 </div>
@@ -89,23 +89,17 @@ const Billing = ({ firebase, match, auth }) => {
                   <div className="card-header bg-primary-light py-4 border-0">
                     <div className="media align-items-center">
                       <div className="media-body">
-                        <h4 className="h6 subtitle text-sm text-primary">What info is shared
-                          with others?</h4>
+                        <h4 className="h6 subtitle text-sm text-primary">What is Stripe?</h4>
                       </div>
-                      <svg
-                        className="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">
-                        <use xlinkHref="#identity-1"></use>
-                      </svg>
+                      <img src="/img/brand/stripe/stripe_logo_white.svg" width="120"/>
                     </div>
                   </div>
                   <div className="card-body p-4">
-                    <p className="text-muted text-sm card-text">Directory only releases contact
-                      information for hosts and guests <strong>after a reservation is
-                        confirmed</strong>.</p>
-                    <p className="text-muted text-sm card-text">Amet nisi eiusmod minim commodo sit
-                      voluptate aute ut quis ea veniam sunt proident ex. <strong>Exercitation
-                        culpa laboris</strong> consequat fugiat non ipsum veniam Lorem aliqua
-                      deserunt tempor elit veniam.</p>
+                    <p className="text-muted text-sm card-text">Stripe is a technology company that builds economic
+                      infrastructure for the internet.</p>
+                    <p className="text-muted text-sm card-text">Stripe is used by the worlds largest companies such
+                      as Google, Uber, and Amazon. Stripe not only provides secure transactions, but also tools such as
+                    an account dashboard empowering you to manage your business with ease.</p>
                   </div>
                 </div>
               </div>

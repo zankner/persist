@@ -3,6 +3,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const enforce = require('express-sslify');
 const admin = require('firebase-admin');
+const session = require('express-session');
+const {Firestore} = require('@google-cloud/firestore');
+const {FirestoreStore} = require('@google-cloud/connect-firestore');
 
 // Create express app
 const app = express();
@@ -31,7 +34,21 @@ const apiRouter = require('./routes/api');
 
 // Set up app
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+	store: new FirestoreStore({
+		dataset: new Firestore({
+			kind: 'express-sessions',
+			keyFilename: './serviceAccountKey.json'
+		}),
+	}),
+	cooke: {
+		maxAge: 60000
+	},
+	secret: process.env.COOKIE_SECRET,
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 

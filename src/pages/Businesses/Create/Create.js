@@ -100,7 +100,7 @@ const Create = ({auth, profile, firebase}) => {
                 {slideIndex === 2 && <Specifics />}
                 {slideIndex === 3 && <Photos auth={auth}/>}
                 {slideIndex === 4 && <Completion
-                  creationStatus={creationStatus} profile={profile} businessId={businessId}/>}
+                  creationStatus={creationStatus} profile={profile} businessId={businessId} firebase={firebase}/>}
                 <div className="row form-block flex-column flex-sm-row">
                   <div className="col text-center text-sm-left">
                     <button className={`btn btn-link text-muted ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}

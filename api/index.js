@@ -9,6 +9,7 @@ module.exports.businesses = {
   update: require('./business/update'),
   get: require('./business/get'),
   billing: {
+    connect: require('./business/billing/connect'),
     create: require('./business/billing/create')
   },
   admin: {

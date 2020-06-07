@@ -1,8 +1,26 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import axios from 'axios';
+import {compose} from 'redux';
 
 
-const Completion = ({ creationStatus, profile, businessId }) => {
+const Completion = ({ creationStatus, profile, businessId, firebase, history }) => {
+
+  const [alert, setAlert] = useState(null);
+
+  const connectBilling = () => {
+    firebase.auth().currentUser.getIdToken()
+      .then(token => {
+        axios.post(`/api/businesses/${businessId}/billing/connect`, {}, {
+          headers: {Authorization: token}
+        })
+          .then(res => {
+            window.location = res.data.stripeUrl;
+          })
+          .catch(() => setAlert("Something went wrong. Please try again."));
+      })
+      .catch(() => setAlert("Something went wrong. Please try again."));
+  };
 
   if (creationStatus === null || (!businessId && creationStatus)) return <></>;
 
@@ -22,8 +40,8 @@ const Completion = ({ creationStatus, profile, businessId }) => {
           : 'We\'re sorry. Unfortunately, an error occurred creating your business.'}</p>
         {creationStatus === true
         ? <>
-            <Link className="btn btn-primary mr-2 mb-2" to={`/businesses/${businessId}`}>View business</Link>
-            <Link className="btn btn-outline-muted mb-2" to='/'>Return home</Link>
+            <button className="btn btn-primary mr-2 mb-2" type="button" onClick={connectBilling}>Set up billing</button>
+            <Link className="btn btn-outline-muted mb-2" to={`/businesses/${businessId}`}>View business</Link>
           </>
         : <>
             <Link className="btn btn-primary mr-2 mb-2" to='/business/create'
@@ -36,4 +54,4 @@ const Completion = ({ creationStatus, profile, businessId }) => {
   )
 };
 
-export default Completion;
+export default compose(withRouter(Completion));

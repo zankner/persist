@@ -79,7 +79,7 @@ const Billing = ({ firebase, match, auth }) => {
                   <div className="col-md-5">
                     <div className="row">
                       <button className="btn btn-primary btn-block mb-2" onClick={connectDashboard}>Manage account</button>
-                      <button className="btn btn-outline-muted btn-block mb-2" onClick={connectBilling}>Create account</button>
+                      <button className="btn btn-outline-muted btn-block mb-2" onClick={connectBilling}>Connect new account</button>
                     </div>
                   </div>
                 </div>

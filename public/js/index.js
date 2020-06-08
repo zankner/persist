@@ -40,11 +40,10 @@ import AdminBusinessDescription from '../../src/pages/Businesses/Admin/Business/
 import AdminBusinessSpecifics from '../../src/pages/Businesses/Admin/Business/Specifics/Specifics';
 import AdminBusinessPhotos from '../../src/pages/Businesses/Admin/Business/Photos/Photos';
 import CreateProduct from '../../src/pages/Products/Create/Create';
-import ProductBackground from '../../src/pages/Products/Create/Background/Background';
-import ProductDescription from '../../src/pages/Products/Create/Description/Description';
-import ProductSpecifics from '../../src/pages/Products/Create/Specifics/Specifics';
-import ProductPhotos from '../../src/pages/Products/Create/Photos/Photos';
-import ProductCompletion from '../../src/pages/Products/Create/Completion/Completion';
+import ProductBackground from '../../src/pages/Products/Create/components/Background/Background';
+import ProductSpecifics from '../../src/pages/Products/Create/components/Specifics/Specifics';
+import ProductPhotos from '../../src/pages/Products/Create/components/Photos/Photos';
+import ProductCompletion from '../../src/pages/Products/Create/components/Completion/Completion';
 import EditProduct from '../../src/pages/Products/Edit/Edit';
 import EditProductBackground from '../../src/pages/Products/Edit/Background/Background';
 import EditProductDescription from '../../src/pages/Products/Edit/Description/Description';
@@ -119,9 +118,9 @@ render(
 					<Route exact path='/businesses/:business/admin/specifics' component={AdminBusinessSpecifics} />
 					<Route exact path='/businesses/:business/admin/photos' component={AdminBusinessPhotos} />
 					<Route exact path='/businesses/:business/admin/products/:product' component={BusinessProduct} />
+					<Route exact path='/businesses/:business/products/create' component={CreateProduct} />
 					<Route exact path='/product/create' component={CreateProduct} />
 					<Route exact path='/product/create/background' component={ProductBackground} />
-					<Route exact path='/product/create/description' component={ProductDescription} />
 					<Route exact path='/product/create/specifics' component={ProductSpecifics} />
 					<Route exact path='/product/create/photos' component={ProductPhotos} />
 					<Route exact path='/product/create/completion' component={ProductCompletion} />

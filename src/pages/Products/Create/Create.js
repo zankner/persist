@@ -95,8 +95,7 @@ const Create = ({auth, profile, firebase, match}) => {
                 description: "",
                 tax: business.tax,
                 isSizing: "",
-                sizes: [''],
-                availability: [],
+                sizes: [{size: '', available: true}],
                 photos: []
               }}
               onSubmit={handleSubmit}

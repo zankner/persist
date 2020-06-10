@@ -17,6 +17,12 @@ const Specifics = props => {
 
   const {touched, errors, values, setFieldValue} = useFormikContext();
 
+  const handleAvailability = (availability, index) => {
+    console.log(availability);
+    // setFieldValue(`sizes.${index}.available`, availability);
+    console.log(values.sizes[index]);
+  };
+
   return (
     <div className="container">
       <p className="subtitle text-primary">Add new listing</p>
@@ -56,29 +62,66 @@ const Specifics = props => {
         </div>
         <Collapse in={showSize === true}>
           <div className="form-group">
-            <div className="col-sm-4 pl-0">
-              <label className="form-label" htmlFor="form_name">Product sizes</label>
+            <div className="col-md-9 pl-0">
+              <div className="d-flex justify-content-between">
+                <label className="form-label" htmlFor="form_name">Product sizes</label>
+                <label className="form-label" htmlFor="form_name">In Stock</label>
+              </div>
               <FieldArray
                 name="sizes"
                 render={arrayHelpers => (
                   <div>
-                    {values.sizes.map((size, index) => (
+                    {values.sizes.map(({size, availability}, index) => (
                       <div key={index}>
-                        <div className="input-group mb-2">
-                          <Field
-                            name={`sizes.${index}`}
-                            placeholder="MD"
-                            type="text"
-                            className={getIn(errors, "sizes") && getIn(touched, "sizes")
-                              ? 'form-control is-invalid'
-                              : 'form-control'
-                            }
-                          />
-                          <div className="input-group-append">
-                            <button type="button" className="btn btn-secondary input-group-btn fa-lg"
-                                    onClick={() => arrayHelpers.remove(values.sizes.indexOf(size))}>
-                              <i className="fas fa-trash" />
-                            </button>
+                        <div className="d-flex justify-content-between row mb-2">
+                          <div className="col-6">
+                            <div className="input-group">
+                              <Field
+                                name={`sizes.${index}.size`}
+                                placeholder="MD"
+                                type="text"
+                                className={getIn(errors, "sizes") && getIn(touched, "sizes")
+                                  ? 'form-control is-invalid'
+                                  : 'form-control'
+                                }
+                              />
+                              <div className="input-group-append">
+                                <button type="button" className="btn btn-secondary input-group-btn fa-lg"
+                                        onClick={() => arrayHelpers.remove(index)}>
+                                  <i className="fas fa-trash" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-4">
+                            <div className="btn-group btn-group-toggle d-flex justify-content-end">
+                              <label className={`btn btn-primary ${values.sizes[index].available === false ? 'disabled' : ''}`}>
+                                <Field type="radio" name={`sizes.${index}.available`} id="option2" autoComplete="off"
+                                       checked={values.sizes[index].available === true}
+                                       onChange={e => {
+                                         if (e.target.checked) {
+                                           console.log(values.sizes[index]);
+                                           setFieldValue(`sizes.${index}.available`, true);
+                                           console.log(values.sizes[index]);
+                                         }
+                                       }}
+                                />
+                                <i className="fas fa-check"/>
+                              </label>
+                              <label className={`btn btn-primary ${values.sizes[index].available === true ? 'disabled' : ''}`}>
+                                <Field type="radio" name={`sizes.${index}.available`} id="option2" autoComplete="off"
+                                       checked={values.sizes[index].available === false}
+                                       onChange={e => {
+                                         if (e.target.checked) {
+                                           console.log(values.sizes[index]);
+                                           setFieldValue(`sizes.${index}.available`, false);
+                                           console.log(values.sizes[index]);
+                                         }
+                                       }}
+                                />
+                                <i className="fas fa-times"/>
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -86,8 +129,10 @@ const Specifics = props => {
                   </div>
                 )}
               />
-              <button type="button" className="btn btn-block btn-primary"
-                      onClick={() => setFieldValue('sizes', values.sizes.concat(''))}><i className="fas fa-plus fa-lg" /></button>
+              <div className="col-6 pl-0">
+                <button type="button" className="btn btn-block btn-primary"
+                        onClick={() => setFieldValue('sizes', values.sizes.concat(''))}><i className="fas fa-plus fa-lg" /></button>
+              </div>
             </div>
           </div>
         </Collapse>

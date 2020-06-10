@@ -12,6 +12,7 @@ import Completion from "./components/Completion/Completion";
 import axios from "axios";
 import NotFound from "../../../components/NotFound";
 import Specifics from "./components/Specifics/Specifics";
+import Sales from "./components/Sales/Sales";
 
 
 const Create = ({auth, profile, firebase, match}) => {
@@ -23,14 +24,13 @@ const Create = ({auth, profile, firebase, match}) => {
   const [business, setBusiness] = useState(null);
 
   const handleSubmit = (values, actions) => {
-    console.log(values.isSizing, 'sizing');
-    if (slideIndex === 3) {
-      const { name, description, tax, isSizing, sizes, availability, photos } = values;
+    if (slideIndex === 4) {
+      const { name, description, tax, isSizing, sizes, photos } = values;
 
       firebase.auth().currentUser.getIdToken()
         .then(token => {
-          axios.post(`/api/businesses/${match.params.business}/products/create`, {
-            name, description, tax, isSizing, sizes, availability, photos
+          axios.post(`/api/products/businesses/${match.params.business}/create`, {
+            name, price, description, tax, isSizing, sizes, photos
           }, {
             headers: {Authorization: token}
           })
@@ -83,7 +83,7 @@ const Create = ({auth, profile, firebase, match}) => {
       <div className="pt-nav">
         <div className="progress rounded-0 sticky-top" style={{height: '8px', top: '78px'}}>
           <div className="progress-bar" role="progressbar" style={{
-            width: `${25 * slideIndex}%`, ariaValuenow: `${25 * slideIndex}`, ariaValuemin: "0",
+            width: `${20 * slideIndex}%`, ariaValuenow: `${20 * slideIndex}`, ariaValuemin: "0",
             ariaValuemax: "100"
           }}/>
         </div>
@@ -95,6 +95,7 @@ const Create = ({auth, profile, firebase, match}) => {
                 description: "",
                 tax: business.tax,
                 isSizing: "",
+                price: "",
                 sizes: [{size: '', available: true}],
                 photos: []
               }}
@@ -104,20 +105,22 @@ const Create = ({auth, profile, firebase, match}) => {
                 <Form className="form-validate" autoComplete="off">
                   {slideIndex === 0 && <Introduction setSlideIndex={setSlideIndex}/>}
                   {slideIndex === 1 && <Background />}
-                  {slideIndex === 2 && <Specifics />}
-                  {slideIndex === 3 && <Photos auth={auth}/>}
-                  {slideIndex === 4 && <Completion
-                    creationStatus={creationStatus} profile={profile} businessId={businessId} firebase={firebase}/>}
+                  {slideIndex === 2 && <Sales />}
+                  {slideIndex === 3 && <Specifics />}
+                  {slideIndex === 4 && <Photos auth={auth}/>}
+                  {slideIndex === 5 && <Completion
+                    creationStatus={creationStatus} profile={profile} businessId={business.id}
+                    productId={productId} firebase={firebase}/>}
                   <div className="row form-block flex-column flex-sm-row">
                     <div className="col text-center text-sm-left">
-                      <button className={`btn btn-link text-muted ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}
+                      <button className={`btn btn-link text-muted ${(slideIndex === 0 || slideIndex === 5) ? 'd-none' : ''}`}
                               type="button"
                               onClick={() => setSlideIndex(slideIndex - 1)}>
                         <i className="fa-chevron-left fa mr-2"/>Back
                       </button>
                     </div>
                     <div className="col text-center text-sm-right">
-                      <button className={`btn btn-primary px-3 ${(slideIndex === 0 || slideIndex === 4) ? 'd-none' : ''}`}
+                      <button className={`btn btn-primary px-3 ${(slideIndex === 0 || slideIndex === 5) ? 'd-none' : ''}`}
                               type="submit"> {slideIndex === 3 ? 'Add Business' : 'Next step'}
                         <i className="fa-chevron-right fa ml-2"/></button></div>
                   </div>

@@ -4,14 +4,25 @@ const status = require('http-status');
 const check = require('check-types');
 
 module.exports = async (req, res) => {
-  const {business, photos, description, title, price} = req.body;
+  const {name, description, tax, price, isSizing, sizes, photos} = req.body;
 
   try {
-    check.assert.nonEmptyString(business);
-    check.assert.maybe.array.of.nonEmptyString(photos);
+    check.assert.nonEmptyString(name);
     check.assert.nonEmptyString(description);
-    check.assert.nonEmptyString(title);
+    check.assert.number(tax);
     check.assert.number(price);
+    check.assert.boolean(isSizing);
+    check.assert.all(
+        check.map(
+            sizes,
+            {
+              size: check.nonEmptyString,
+              available: check.boolean
+            }
+        )
+    )
+    ;
+    check.assert.array.of.nonEmptyString(phtoos);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
   }
@@ -20,18 +31,20 @@ module.exports = async (req, res) => {
     const { uid } = await admin.auth().verifyIdToken(req.headers.authorization);
     if (!uid) return res.sendStatus(status.UNAUTHORIZED);
 
-    const businessRef = admin.firestore().collection('businesses').doc(business);
+    const businessRef = admin.firestore().collection('businesses').doc(req.params.business);
     const businessDoc = await businessRef.get();
     if (!businessDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
     if (!businessDoc.data().admins.includes(uid)) return res.sendStatus(status.UNAUTHORIZED);
 
     const product = {
       business: businessRef,
-      photos: photos || [],
+      photos,
       description,
-      title,
+      name,
       price,
-      availability: 'available'
+      tax,
+      isSizing,
+      sizes
     };
 
     const productId = `${uid}-${Date.now()}`;

@@ -25,12 +25,14 @@ const Create = ({auth, profile, firebase, match}) => {
 
   const handleSubmit = (values, actions) => {
     if (slideIndex === 4) {
-      const { name, description, tax, isSizing, sizes, photos } = values;
+      const { name, description, tax, isSizing, price, sizes, photos, filePath } = values;
+      console.log("called");
+      console.log(filePath, 'real file');
 
       firebase.auth().currentUser.getIdToken()
         .then(token => {
           axios.post(`/api/products/businesses/${match.params.business}/create`, {
-            name, price, description, tax, isSizing, sizes, photos
+            name, price, description, tax, isSizing, sizes, photos, filePath
           }, {
             headers: {Authorization: token}
           })
@@ -96,6 +98,7 @@ const Create = ({auth, profile, firebase, match}) => {
                 tax: business.tax,
                 isSizing: "",
                 price: "",
+                filePath: "",
                 sizes: [{size: '', available: true}],
                 photos: []
               }}
@@ -107,7 +110,7 @@ const Create = ({auth, profile, firebase, match}) => {
                   {slideIndex === 1 && <Background />}
                   {slideIndex === 2 && <Sales />}
                   {slideIndex === 3 && <Specifics />}
-                  {slideIndex === 4 && <Photos auth={auth}/>}
+                  {slideIndex === 4 && <Photos auth={auth} businessId={business.id}/>}
                   {slideIndex === 5 && <Completion
                     creationStatus={creationStatus} profile={profile} businessId={business.id}
                     productId={productId} firebase={firebase}/>}
@@ -121,7 +124,7 @@ const Create = ({auth, profile, firebase, match}) => {
                     </div>
                     <div className="col text-center text-sm-right">
                       <button className={`btn btn-primary px-3 ${(slideIndex === 0 || slideIndex === 5) ? 'd-none' : ''}`}
-                              type="submit"> {slideIndex === 3 ? 'Add Business' : 'Next step'}
+                              type="submit"> {slideIndex === 4 ? 'Add Business' : 'Next step'}
                         <i className="fa-chevron-right fa ml-2"/></button></div>
                   </div>
                 </Form>

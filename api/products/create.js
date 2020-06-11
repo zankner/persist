@@ -4,7 +4,7 @@ const status = require('http-status');
 const check = require('check-types');
 
 module.exports = async (req, res) => {
-  const {name, description, tax, price, isSizing, sizes, photos} = req.body;
+  const {name, description, tax, price, isSizing, sizes, photos, filePath} = req.body;
 
   try {
     check.assert.nonEmptyString(name);
@@ -12,18 +12,20 @@ module.exports = async (req, res) => {
     check.assert.number(tax);
     check.assert.number(price);
     check.assert.boolean(isSizing);
-    check.assert.all(
-        check.map(
-            sizes,
-            {
-              size: check.nonEmptyString,
-              available: check.boolean
-            }
-        )
-    )
-    ;
-    check.assert.array.of.nonEmptyString(phtoos);
+    // check.assert.all(
+    //     check.map(
+    //         sizes,
+    //         {
+    //           size: check.nonEmptyString,
+    //           available: check.boolean
+    //         }
+    //     )
+    // );
+    check.assert.array.of.nonEmptyString(photos);
+    check.assert.nonEmptyString(filePath);
   } catch {
+    console.log("err here");
+    console.log(filePath, "file path");
     return res.sendStatus(status.BAD_REQUEST);
   }
 
@@ -44,7 +46,8 @@ module.exports = async (req, res) => {
       price,
       tax,
       isSizing,
-      sizes
+      sizes,
+      filePath
     };
 
     const productId = `${uid}-${Date.now()}`;

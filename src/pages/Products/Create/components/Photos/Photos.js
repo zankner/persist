@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone";
 import {withFirebase} from "react-redux-firebase";
 import {compose} from "redux";
 
-const Photos = ({ firebase, auth }) => {
+const Photos = ({ firebase, auth, businessId }) => {
 
   const [uploading, setUploading] = useState(false);
   const { values, setFieldValue } = useFormikContext();
@@ -27,7 +27,8 @@ const Photos = ({ firebase, auth }) => {
                 accept={['image/jpeg', 'image/png', 'image/gif']}
                 onDrop={(acceptedFiles) => {
                   setUploading(true);
-                  firebase.uploadFiles(`${auth.uid}`, acceptedFiles).then((files) => {
+                  const filePath = Date.now().toString();
+                  firebase.uploadFiles(`${businessId}/${filePath}`, acceptedFiles).then((files) => {
                     Promise.all(
                       files.map((file) => (
                         file.uploadTaskSnapshot.ref.getDownloadURL()
@@ -35,7 +36,11 @@ const Photos = ({ firebase, auth }) => {
                             setFieldValue('photos', values.photos.concat(downloadURL));
                           }).then(() => setUploading(false))
                       ))
-                    ).then(() => setUploading(false));
+                    ).then(() => {
+                        setUploading(false);
+                        console.log(filePath);
+                        setFieldValue('filePath', filePath);
+                    });
                   });
                 }}
               >

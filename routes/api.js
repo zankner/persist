@@ -26,7 +26,7 @@ router.post('/orders/:order/customer/update', api.orders.customers.update);
 router.get('/orders/:order/customer/get', api.orders.customers.get);
 
 // Products
-router.post('/products/create', api.products.create);
+router.post('/products/businesses/:business/create', api.products.create);
 router.post('/products/:product/update', api.products.update);
 router.get('/products/:product/get', api.products.update);
 

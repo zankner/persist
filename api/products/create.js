@@ -39,6 +39,8 @@ module.exports = async (req, res) => {
     if (!businessDoc.data()) return res.sendStatus(status.UNAUTHORIZED);
     if (!businessDoc.data().admins.includes(uid)) return res.sendStatus(status.UNAUTHORIZED);
 
+    const productId = `${uid}-${Date.now()}`;
+
     const product = {
       business: businessRef,
       photos,
@@ -48,10 +50,11 @@ module.exports = async (req, res) => {
       tax,
       isSizing,
       sizes,
-      filePath
+      filePath,
+      id: productId
     };
 
-    const productId = `${uid}-${Date.now()}`;
+
     const productRef = admin.firestore().collection('products').doc(productId);
     const productDoc = await productRef.get();
 

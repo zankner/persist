@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from "react-router-dom";
-import axios from 'axios';
 import {compose} from 'redux';
 
 
 const Completion = ({ creationStatus, profile, productId, businessId, firebase }) => {
-
-  const [alert, setAlert] = useState(null);
-
+  
   if (creationStatus === null || (!productId && creationStatus)) return <></>;
 
   return (

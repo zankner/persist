@@ -38,7 +38,6 @@ const Photos = ({ firebase, auth, businessId }) => {
                       ))
                     ).then(() => {
                         setUploading(false);
-                        console.log(filePath);
                         setFieldValue('filePath', filePath);
                     });
                   });

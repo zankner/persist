@@ -12,16 +12,7 @@ const Specifics = props => {
 
   const [showSize, setShowSize] = useState(null);
 
-  const days = ['Sunday', 'Monday', 'Tuesday',
-    'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
   const {touched, errors, values, setFieldValue} = useFormikContext();
-
-  const handleAvailability = (availability, index) => {
-    console.log(availability);
-    // setFieldValue(`sizes.${index}.available`, availability);
-    console.log(values.sizes[index]);
-  };
 
   return (
     <div className="container">
@@ -100,9 +91,7 @@ const Specifics = props => {
                                        checked={values.sizes[index].available === true}
                                        onChange={e => {
                                          if (e.target.checked) {
-                                           console.log(values.sizes[index]);
                                            setFieldValue(`sizes.${index}.available`, true);
-                                           console.log(values.sizes[index]);
                                          }
                                        }}
                                 />
@@ -113,9 +102,7 @@ const Specifics = props => {
                                        checked={values.sizes[index].available === false}
                                        onChange={e => {
                                          if (e.target.checked) {
-                                           console.log(values.sizes[index]);
                                            setFieldValue(`sizes.${index}.available`, false);
-                                           console.log(values.sizes[index]);
                                          }
                                        }}
                                 />
@@ -139,58 +126,6 @@ const Specifics = props => {
         <Collapse in={showSize === false}>
           <h1>test 2</h1>
         </Collapse>
-        {/*<div className="form-group">*/}
-        {/*  <div className="col-sm-4 pl-0">*/}
-        {/*    <label className="form-label" htmlFor="form_name">Sales tax</label>*/}
-        {/*    <div className="input-group">*/}
-        {/*      <Field*/}
-        {/*        name="tax"*/}
-        {/*        placeholder="6.25"*/}
-        {/*        type="number"*/}
-        {/*        className={getIn(errors, "tax") && getIn(touched, "tax")*/}
-        {/*          ? 'form-control is-invalid'*/}
-        {/*          : 'form-control'*/}
-        {/*        }*/}
-        {/*      />*/}
-        {/*      <div className="input-group-append">*/}
-        {/*        <div className="input-group-text">%</div>*/}
-        {/*      </div>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-        {/*<div className="form-group">*/}
-        {/*  <label className="form-label">Days of business</label>*/}
-        {/*  <FieldArray*/}
-        {/*    name="daysOpen"*/}
-        {/*    render={arrayHelpers => (*/}
-        {/*      <div>*/}
-        {/*        {days.map((day) => (*/}
-        {/*          <div key={day}>*/}
-        {/*            <div className="custom-control custom-checkbox">*/}
-        {/*              <input*/}
-        {/*                name="daysOpen"*/}
-        {/*                type="checkbox"*/}
-        {/*                className="custom-control-input"*/}
-        {/*                value={day}*/}
-        {/*                id={day}*/}
-        {/*                checked={!!values.daysOpen.includes(day.toLowerCase())}*/}
-        {/*                onChange={e => {*/}
-        {/*                  console.log(values.daysOpen);*/}
-        {/*                  if (e.target.checked) arrayHelpers.push(day.toLowerCase());*/}
-        {/*                  else {*/}
-        {/*                    const idx = values.daysOpen.indexOf(day.toLowerCase());*/}
-        {/*                    arrayHelpers.remove(idx);*/}
-        {/*                  }*/}
-        {/*                }}*/}
-        {/*              />*/}
-        {/*              <label className="custom-control-label text-muted" htmlFor={day}>{day}</label>*/}
-        {/*            </div>*/}
-        {/*          </div>*/}
-        {/*        ))}*/}
-        {/*      </div>*/}
-        {/*    )}*/}
-        {/*  />*/}
-        {/*</div>*/}
       </div>
     </div>
 </div>

@@ -26,8 +26,6 @@ const Create = ({auth, profile, firebase, match}) => {
   const handleSubmit = (values, actions) => {
     if (slideIndex === 4) {
       const { name, description, tax, isSizing, price, sizes, photos, filePath } = values;
-      console.log("called");
-      console.log(filePath, 'real file');
 
       firebase.auth().currentUser.getIdToken()
         .then(token => {

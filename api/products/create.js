@@ -12,20 +12,21 @@ module.exports = async (req, res) => {
     check.assert.number(tax);
     check.assert.number(price);
     check.assert.boolean(isSizing);
-    // check.assert.all(
-    //     check.map(
-    //         sizes,
-    //         {
-    //           size: check.nonEmptyString,
-    //           available: check.boolean
-    //         }
-    //     )
-    // );
+    for (let i = 0; i < sizes.length; i++) {
+      const viable = check.all(
+          check.map(
+              sizes[i],
+              {
+                size: check.nonEmptyString,
+                available: check.boolean
+              }
+          )
+      );
+      check.assert(viable);
+    }
     check.assert.array.of.nonEmptyString(photos);
     check.assert.nonEmptyString(filePath);
   } catch {
-    console.log("err here");
-    console.log(filePath, "file path");
     return res.sendStatus(status.BAD_REQUEST);
   }
 

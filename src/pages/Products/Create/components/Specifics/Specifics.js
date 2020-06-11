@@ -123,9 +123,6 @@ const Specifics = props => {
             </div>
           </div>
         </Collapse>
-        <Collapse in={showSize === false}>
-          <h1>test 2</h1>
-        </Collapse>
       </div>
     </div>
 </div>

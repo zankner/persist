@@ -7,21 +7,33 @@ module.exports = async (req, res) => {
   const {name, description, tax, price, isSizing, sizes, photos, filePath} = req.body;
 
   try {
+    console.log(isSizing);
     check.assert.nonEmptyString(name);
     check.assert.nonEmptyString(description);
     check.assert.number(tax);
     check.assert.number(price);
     check.assert.boolean(isSizing);
-    for (let i = 0; i < sizes.length; i++) {
-      const viable = check.all(
-          check.map(
-              sizes[i],
-              {
-                size: check.nonEmptyString,
-                available: check.boolean
-              }
-          )
-      );
+    if (isSizing) {
+      for (let i = 0; i < sizes.length; i++) {
+        const viable = check.all(
+            check.map(
+                sizes[i],
+                {
+                  size: check.nonEmptyString,
+                  available: check.boolean
+                }
+            )
+        );
+        check.assert(viable);
+      }
+    } else {
+      check.assert(sizes.length === 1)
+      const viable = check.all(check.map(
+        sizes[0], {
+          size: check.emptyString,
+          available: check.assert
+        }
+      ));
       check.assert(viable);
     }
     check.assert.array.of.nonEmptyString(photos);

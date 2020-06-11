@@ -4,7 +4,7 @@ import {compose} from 'redux';
 
 
 const Completion = ({ creationStatus, profile, productId, businessId, firebase }) => {
-  
+
   if (creationStatus === null || (!productId && creationStatus)) return <></>;
 
   return (
@@ -23,7 +23,7 @@ const Completion = ({ creationStatus, profile, productId, businessId, firebase }
           : 'We\'re sorry. Unfortunately, an error occurred creating your business.'}</p>
         {creationStatus === true
         ? <>
-            <Link className="btn btn-primary mr-2 mb-2" to="/products/:product">View product</Link>
+            <Link className="btn btn-primary mr-2 mb-2" to={`/products/${productId}`}>View product</Link>
             <Link className="btn btn-outline-muted mb-2" to={`/businesses/${businessId}`}>Return to business</Link>
           </>
         : <>

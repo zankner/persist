@@ -4,12 +4,12 @@ const check = require('check-types');
 
 
 module.exports = async (req, res) => {
-  const {photos, description, title, price} = req.body;
+  const {photos, description, name, price} = req.body;
 
   try {
     check.assert.maybe.array.of.nonEmptyString(photos);
     check.assert.maybe.nonEmptyString(description);
-    check.assert.maybe.nonEmptyString(title);
+    check.assert.maybe.nonEmptyString(name);
     check.assert.maybe.number(price);
   } catch {
     return res.sendStatus(status.BAD_REQUEST);
@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 
     product.photos = photos || product.photos;
     product.description = description || product.description;
-    product.title = title || product.title;
+    product.title = name || product.title;
     product.price = price || product.price;
 
     await productRef.update(product);
